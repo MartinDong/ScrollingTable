@@ -19,15 +19,6 @@ class RvType2Adapter : BaseQuickAdapter<Type2Model, BaseViewHolder>(R.layout.ite
         //当前的条目位置信息
         val productPosition = helper.adapterPosition
 
-        helper.itemView.setOnTouchListener { v, event ->
-            when (event.action) {
-                MotionEvent.ACTION_UP -> {
-                    setOnItemClick(helper.itemView, productPosition)
-                }
-            }
-            false
-        }
-
         helper.setText(R.id.tv_product_name, item.productName)
 
         val rightAdapter = RvType2RightAdapter()

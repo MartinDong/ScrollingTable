@@ -1,6 +1,7 @@
 package com.example.kotlin.scrollingtable.type3
 
-import android.view.LayoutInflater
+import android.support.v7.widget.LinearLayoutManager
+import android.view.MotionEvent
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -15,7 +16,7 @@ import com.example.kotlin.scrollingtable.type3.model.Type3ProductModel
 class RvType3RightAdapter : BaseQuickAdapter<Type3ProductModel, BaseViewHolder>(R.layout.item_layout_type3) {
     private var TAG = RvType3RightAdapter::class.java.name
 
-    var rvRvMainLeftAdapter: RvType3LeftAdapter? = null
+    var rvLeftLinearLayoutManager: LinearLayoutManager? = null
 
     override fun convert(helper: BaseViewHolder, item: Type3ProductModel) {
         //当前的条目位置信息
@@ -24,9 +25,29 @@ class RvType3RightAdapter : BaseQuickAdapter<Type3ProductModel, BaseViewHolder>(
         val ll_item = helper.getView<LinearLayout>(R.id.ll_item)
 
         item.mRightDataList.forEach {
-            val itemView = LayoutInflater.from(mContext).inflate(R.layout.item_layout, null)
+            val itemView = getItemView(R.layout.item_layout, null)
             itemView.findViewById<TextView>(R.id.tv_data).text = it.priceName
             ll_item.addView(itemView)
+        }
+
+
+        helper.itemView.setOnTouchListener { view, event ->
+            val ll_item = rvLeftLinearLayoutManager?.findViewByPosition(productPosition)
+
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    helper.itemView.isPressed = true
+                    ll_item?.isPressed = true
+                }
+                MotionEvent.ACTION_UP -> {
+                    helper.itemView.isPressed = false
+                    ll_item?.isPressed = false
+                }
+                MotionEvent.ACTION_MOVE -> {
+
+                }
+            }
+            false
         }
 
     }

@@ -2,6 +2,7 @@ package com.example.kotlin.scrollingtable.type3
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.example.kotlin.scrollingtable.R
@@ -47,8 +48,8 @@ class Type3Activity : AppCompatActivity() {
         mRightAdapter!!.setNewData(mDataList)
         rv_list_right.adapter = mRightAdapter
 
-        mLeftAdapter!!.rvMainRightAdapter = mRightAdapter
-        mRightAdapter!!.rvRvMainLeftAdapter = mLeftAdapter
+        mLeftAdapter!!.rvRightLinearLayoutManager = rv_list_right.layoutManager as LinearLayoutManager
+        mRightAdapter!!.rvLeftLinearLayoutManager = rv_list_left.layoutManager as LinearLayoutManager
 
         //注册条目点击监听
         mLeftAdapter?.setOnItemClickListener { adapter, view, position ->

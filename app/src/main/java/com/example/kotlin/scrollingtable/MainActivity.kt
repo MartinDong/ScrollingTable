@@ -3,9 +3,11 @@ package com.example.kotlin.scrollingtable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private var TAG = MainActivity::class.java.name
 
     private var mLeftAdapter: RvAdapter? = null
     private var mLeftDataList: MutableList<String>? = null
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         mLeftAdapter = RvAdapter()
         mLeftDataList = mutableListOf()
-        for (index in 1..40) {
+        for (index in 0..40) {
             mLeftDataList!!.add("股票名称$index")
         }
         mLeftAdapter!!.setNewData(mLeftDataList)
@@ -28,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         mRightAdapter = RvAdapter()
         mRightDataList = mutableListOf()
-        for (produceIndex in 1..40) {
-            for (priceIndex in 1..5) {
+        for (produceIndex in 0..40) {
+            for (priceIndex in 0..4) {
                 mRightDataList!!.add("股票${produceIndex}价格-${priceIndex}")
             }
         }
@@ -38,10 +40,10 @@ class MainActivity : AppCompatActivity() {
 
         //注册条目点击监听
         mLeftAdapter?.setOnItemClickListener { adapter, view, position ->
-
+            Log.d(TAG, "mLeftAdapter click position >> " + position)
         }
         mRightAdapter?.setOnItemClickListener { adapter, view, position ->
-
+            Log.d(TAG, "mRightAdapter click position >> " + position)
         }
 
 

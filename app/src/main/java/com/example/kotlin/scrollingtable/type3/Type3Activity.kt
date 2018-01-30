@@ -28,11 +28,11 @@ class Type3Activity : AppCompatActivity() {
         mRightAdapter = RvType3RightAdapter()
 
 
-        for (produceIndex in 0..40) {
+        for (produceIndex in 10..60) {
             val productModel = Type3ProductModel()
             productModel.productName = "股票名称$produceIndex"
 
-            for (priceIndex in 0..4) {
+            for (priceIndex in 1..4) {
                 val mainPriceModel = Type3PriceModel()
                 mainPriceModel.priceName = "股票${produceIndex}价格-${priceIndex}"
                 productModel.mRightDataList.add(mainPriceModel)

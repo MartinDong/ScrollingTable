@@ -23,6 +23,7 @@ class RvType3RightAdapter : BaseQuickAdapter<Type3ProductModel, BaseViewHolder>(
         val productPosition = helper.adapterPosition
 
         val ll_item = helper.getView<LinearLayout>(R.id.ll_item)
+        ll_item.removeAllViews()
 
         item.mRightDataList.forEach {
             val itemView = getItemView(R.layout.item_layout, null)
@@ -31,24 +32,27 @@ class RvType3RightAdapter : BaseQuickAdapter<Type3ProductModel, BaseViewHolder>(
         }
 
 
-        helper.itemView.setOnTouchListener { view, event ->
-            val ll_item = rvLeftLinearLayoutManager?.findViewByPosition(productPosition)
+        val leftItem = rvLeftLinearLayoutManager?.findViewByPosition(productPosition)
 
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    helper.itemView.isPressed = true
-                    ll_item?.isPressed = true
-                }
-                MotionEvent.ACTION_UP -> {
-                    helper.itemView.isPressed = false
-                    ll_item?.isPressed = false
-                }
-                MotionEvent.ACTION_MOVE -> {
+//        helper.itemView.setOnTouchListener { view, event ->
+//            when (event.action) {
+//                MotionEvent.ACTION_DOWN -> {
+//                    helper.itemView.isPressed = true
+//                    leftItem?.isPressed = true
+//                }
+//                MotionEvent.ACTION_UP -> {
+//                    helper.itemView.isPressed = false
+//                    leftItem?.isPressed = false
+//                }
+//                MotionEvent.ACTION_MOVE -> {
+//
+//                }
+//            }
+//            false
+//        }
 
-                }
-            }
-            false
+        helper.itemView.setOnClickListener {
+            leftItem?.callOnClick()
         }
-
     }
 }

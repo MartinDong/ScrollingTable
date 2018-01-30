@@ -12,4 +12,10 @@
             <solid android:color="#cccccc" />
         </shape>
     </item>
+
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#cccccc" />
+        </shape>
+    </item>
 </selector>

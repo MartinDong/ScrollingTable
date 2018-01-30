@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context="com.example.kotlin.scrollingtable.type1.Type1Activity">
+    tools:context="com.example.kotlin.scrollingtable.type3.Type3Activity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_list_product"

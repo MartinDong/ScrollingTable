@@ -27,8 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"
-            app:layoutManager="GridLayoutManager"
-            app:spanCount="5"
+            app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/item_layout" />
     </HorizontalScrollView>
 

@@ -36,8 +36,16 @@ class MainActivity : AppCompatActivity() {
         mRightAdapter!!.setNewData(mRightDataList)
         rv_list_right.adapter = mRightAdapter
 
-        //TODO 注意喽，要划重点了，要考的
+        //注册条目点击监听
+        mLeftAdapter?.setOnItemClickListener { adapter, view, position ->
 
+        }
+        mRightAdapter?.setOnItemClickListener { adapter, view, position ->
+
+        }
+
+
+        //TODO 注意喽，要划重点了，要考的
         //TODO 左侧的RecyclerView与右侧RecyclerView垂直方向的滑动相互监听，实现联动效果
         rv_list_left.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

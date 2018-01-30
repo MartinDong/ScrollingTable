@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="@color/colorAccent"
+        android:overScrollMode="never"
         app:layoutManager="LinearLayoutManager"
         app:spanCount="6"
         tools:listitem="@layout/item_layout" />
@@ -20,12 +21,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:overScrollMode="never"
         android:scrollbars="none">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_list_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:overScrollMode="never"
             app:layoutManager="GridLayoutManager"
             app:spanCount="5"
             tools:listitem="@layout/item_layout" />

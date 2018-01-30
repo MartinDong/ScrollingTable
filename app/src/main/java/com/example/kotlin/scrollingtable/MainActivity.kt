@@ -4,39 +4,52 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import com.example.kotlin.scrollingtable.model.MainPriceModel
+import com.example.kotlin.scrollingtable.model.MainProductModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private var TAG = MainActivity::class.java.name
 
-    private var mLeftAdapter: RvAdapter? = null
-    private var mLeftDataList: MutableList<String>? = null
+    private var mLeftAdapter: RvMainLeftAdapter? = null
+    private var mLeftDataList: MutableList<MainProductModel> = mutableListOf()
 
-    private var mRightAdapter: RvAdapter? = null
-    private var mRightDataList: MutableList<String>? = null
+    private var mRightAdapter: RvMainRightAdapter? = null
+    private var mRightDataList: MutableList<MainPriceModel> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mLeftAdapter = RvAdapter()
-        mLeftDataList = mutableListOf()
-        for (index in 0..40) {
-            mLeftDataList!!.add("股票名称$index")
+        mLeftAdapter = RvMainLeftAdapter()
+        mRightAdapter = RvMainRightAdapter()
+
+
+        for (produceIndex in 0..40) {
+            val productModel = MainProductModel()
+            productModel.producrId = produceIndex
+            productModel.productName = "股票名称$produceIndex"
+
+            for (priceIndex in 0..4) {
+                val mainPriceModel = MainPriceModel()
+                mainPriceModel.priceName = "股票${produceIndex}价格-${priceIndex}"
+                mainPriceModel.productModel = productModel
+                mRightDataList.add(mainPriceModel)
+            }
+
+            mLeftDataList.add(productModel)
         }
+
+
         mLeftAdapter!!.setNewData(mLeftDataList)
         rv_list_left.adapter = mLeftAdapter
 
 
-        mRightAdapter = RvAdapter()
-        mRightDataList = mutableListOf()
-        for (produceIndex in 0..40) {
-            for (priceIndex in 0..4) {
-                mRightDataList!!.add("股票${produceIndex}价格-${priceIndex}")
-            }
-        }
         mRightAdapter!!.setNewData(mRightDataList)
         rv_list_right.adapter = mRightAdapter
+
+        mLeftAdapter!!.rvMainRightAdapter = mRightAdapter
+        mRightAdapter!!.rvRvMainLeftAdapter = mLeftAdapter
 
         //注册条目点击监听
         mLeftAdapter?.setOnItemClickListener { adapter, view, position ->

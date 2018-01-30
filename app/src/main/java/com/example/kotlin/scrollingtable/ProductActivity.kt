@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class ProductActivity : AppCompatActivity() {
 
-    private var TAG= ProductActivity::class.java.name
+    private var TAG = ProductActivity::class.java.name
 
     private var mProductAdapter: RvProductAdapter? = null
     private var mProductDataList: MutableList<ProductModel>? = null
@@ -19,12 +19,12 @@ class ProductActivity : AppCompatActivity() {
 
         mProductAdapter = RvProductAdapter()
         mProductDataList = mutableListOf()
-        for (index in 1..40) {
+        for (index in 0..40) {
             val productModel = ProductModel()
             productModel.productName = "股票名称${index}"
             val priceList: MutableList<String> = mutableListOf()
 
-            for (indexPrice in 1..5) {
+            for (indexPrice in 0..5) {
                 priceList.add("股票${index}价格${indexPrice}")
             }
             productModel.mPriceList = priceList

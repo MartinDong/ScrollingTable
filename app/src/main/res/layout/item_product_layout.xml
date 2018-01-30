@@ -27,7 +27,6 @@
         android:clickable="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/selector_bg_white"
         android:focusable="false"
         android:orientation="horizontal"
         android:overScrollMode="never"

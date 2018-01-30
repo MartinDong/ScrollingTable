@@ -1,6 +1,7 @@
 package com.example.kotlin.scrollingtable
 
 import android.support.v7.widget.RecyclerView
+import android.view.MotionEvent
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.example.kotlin.scrollingtable.model.ProductModel
@@ -16,26 +17,34 @@ class RvProductAdapter : BaseQuickAdapter<ProductModel, BaseViewHolder>(R.layout
         //当前的条目位置信息
         val productPosition = helper.adapterPosition
 
+        helper.itemView.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_UP -> {
+                    setOnItemClick(helper.itemView, productPosition)
+                }
+            }
+            false
+        }
+
         helper.setText(R.id.tv_product_name, item.productName)
 
         val rightAdapter = RvAdapter()
         rightAdapter.setNewData(item.mPriceList)
-
-
         val itemRecyclerView = helper.getView<RecyclerView>(R.id.rv_list_right)
 
-//        itemRecyclerView.setOnClickListener {
-//            setOnItemClick(helper.itemView, productPosition)
-//        }
-
-        rightAdapter.setOnItemClickListener { adapter, view, position ->
-            setOnItemClick(helper.itemView, productPosition)
+        itemRecyclerView.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    helper.itemView.isPressed = true
+                }
+                MotionEvent.ACTION_UP -> {
+                    helper.itemView.isPressed = false
+                    setOnItemClick(helper.itemView, productPosition)
+                }
+            }
+            false
         }
 
-
-//        itemRecyclerView.isClickable = false
-//        itemRecyclerView.isPressed = false
-//        itemRecyclerView.isEnabled = false
         itemRecyclerView.adapter = rightAdapter
         itemRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

@@ -1,37 +1,38 @@
-package com.example.kotlin.scrollingtable
+package com.example.kotlin.scrollingtable.type1
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import com.example.kotlin.scrollingtable.model.MainPriceModel
-import com.example.kotlin.scrollingtable.model.MainProductModel
+import com.example.kotlin.scrollingtable.R
+import com.example.kotlin.scrollingtable.type1.model.Type1PriceModel
+import com.example.kotlin.scrollingtable.type1.model.Type1ProductModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
-    private var TAG = MainActivity::class.java.name
+class Type1Activity : AppCompatActivity() {
+    private var TAG = Type1Activity::class.java.name
 
-    private var mLeftAdapter: RvMainLeftAdapter? = null
-    private var mLeftDataList: MutableList<MainProductModel> = mutableListOf()
+    private var mLeftAdapter: RvType1LeftAdapter? = null
+    private var mLeftDataList: MutableList<Type1ProductModel> = mutableListOf()
 
-    private var mRightAdapter: RvMainRightAdapter? = null
-    private var mRightDataList: MutableList<MainPriceModel> = mutableListOf()
+    private var mRightAdapter: RvType1RightAdapter? = null
+    private var mRightDataList: MutableList<Type1PriceModel> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mLeftAdapter = RvMainLeftAdapter()
-        mRightAdapter = RvMainRightAdapter()
+        mLeftAdapter = RvType1LeftAdapter()
+        mRightAdapter = RvType1RightAdapter()
 
 
         for (produceIndex in 0..40) {
-            val productModel = MainProductModel()
+            val productModel = Type1ProductModel()
             productModel.producrId = produceIndex
             productModel.productName = "股票名称$produceIndex"
 
             for (priceIndex in 0..4) {
-                val mainPriceModel = MainPriceModel()
+                val mainPriceModel = Type1PriceModel()
                 mainPriceModel.priceName = "股票${produceIndex}价格-${priceIndex}"
                 mainPriceModel.productModel = productModel
                 mRightDataList.add(mainPriceModel)

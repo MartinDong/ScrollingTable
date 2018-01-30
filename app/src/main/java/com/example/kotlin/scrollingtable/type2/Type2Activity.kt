@@ -1,26 +1,27 @@
-package com.example.kotlin.scrollingtable
+package com.example.kotlin.scrollingtable.type2
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.example.kotlin.scrollingtable.model.ProductModel
+import com.example.kotlin.scrollingtable.R
+import com.example.kotlin.scrollingtable.type2.model.Type2Model
 import kotlinx.android.synthetic.main.activity_main.*
 
-class ProductActivity : AppCompatActivity() {
+class Type2Activity : AppCompatActivity() {
 
-    private var TAG = ProductActivity::class.java.name
+    private var TAG = Type2Activity::class.java.name
 
-    private var mProductAdapter: RvProductAdapter? = null
-    private var mProductDataList: MutableList<ProductModel>? = null
+    private var mProductAdapter: RvType2Adapter? = null
+    private var mProductDataList: MutableList<Type2Model>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mProductAdapter = RvProductAdapter()
+        mProductAdapter = RvType2Adapter()
         mProductDataList = mutableListOf()
         for (index in 0..40) {
-            val productModel = ProductModel()
+            val productModel = Type2Model()
             productModel.productName = "股票名称${index}"
             val priceList: MutableList<String> = mutableListOf()
 

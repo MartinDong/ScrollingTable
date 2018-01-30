@@ -3,10 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_item"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@drawable/selector_bg_white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:gravity="center_vertical"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal">
 
     <TextView
@@ -21,8 +24,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_list_right"
+        android:clickable="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/selector_bg_white"
+        android:focusable="false"
         android:orientation="horizontal"
         android:overScrollMode="never"
         app:layoutManager="LinearLayoutManager"

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_item"
     android:layout_width="120dp"
-    android:layout_height="50dp">
+    android:layout_height="50dp"
+    android:background="@drawable/selector_bg_white">
 
     <TextView
         android:id="@+id/tv_data"

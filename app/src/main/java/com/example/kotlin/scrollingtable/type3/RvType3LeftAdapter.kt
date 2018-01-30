@@ -24,24 +24,23 @@ class RvType3LeftAdapter : BaseQuickAdapter<Type3ProductModel, BaseViewHolder>(R
 
         val rightItem = rvRightLinearLayoutManager?.findViewByPosition(productPosition)
 
-//        helper.itemView.setOnTouchListener { view, event ->
-//            when (event.action) {
-//                MotionEvent.ACTION_DOWN -> {
-//                    helper.itemView.isPressed = true
-//                    rightItem?.isPressed = true
-//                }
-//                MotionEvent.ACTION_UP -> {
-//                    helper.itemView.isPressed = false
-//                    rightItem?.isPressed = false
-//                }
-//                MotionEvent.ACTION_MOVE -> {
-//
-//                }
-//            }
-//            false
-//        }
-        helper.itemView.setOnClickListener {
-            rightItem?.callOnClick()
+        helper.itemView.setOnTouchListener { view, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    helper.itemView.isPressed = true
+                    rightItem?.isPressed = true
+                }
+                MotionEvent.ACTION_UP -> {
+                    helper.itemView.isPressed = false
+                    rightItem?.isPressed = false
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    helper.itemView.isPressed = false
+                    rightItem?.isPressed = false
+                }
+            }
+            false
         }
+
     }
 }

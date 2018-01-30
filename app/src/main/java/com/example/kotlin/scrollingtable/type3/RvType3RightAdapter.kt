@@ -1,6 +1,7 @@
 package com.example.kotlin.scrollingtable.type3
 
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.MotionEvent
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -34,25 +35,40 @@ class RvType3RightAdapter : BaseQuickAdapter<Type3ProductModel, BaseViewHolder>(
 
         val leftItem = rvLeftLinearLayoutManager?.findViewByPosition(productPosition)
 
-//        helper.itemView.setOnTouchListener { view, event ->
-//            when (event.action) {
-//                MotionEvent.ACTION_DOWN -> {
-//                    helper.itemView.isPressed = true
-//                    leftItem?.isPressed = true
-//                }
-//                MotionEvent.ACTION_UP -> {
-//                    helper.itemView.isPressed = false
-//                    leftItem?.isPressed = false
-//                }
-//                MotionEvent.ACTION_MOVE -> {
-//
-//                }
-//            }
-//            false
-//        }
+        var oldX = 0f
+        var oldY = 0f
 
-        helper.itemView.setOnClickListener {
-            leftItem?.callOnClick()
+        helper.itemView.setOnTouchListener { view, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    oldX = event.x
+                    oldY = event.y
+
+                    helper.itemView.isPressed = true
+                    leftItem?.isPressed = true
+                }
+                MotionEvent.ACTION_UP -> {
+                    helper.itemView.isPressed = false
+                    leftItem?.isPressed = false
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    val newX = event.x
+                    val newY = event.y
+
+                    val moveX = Math.abs(newX - oldX)
+                    val moveY = Math.abs(newY - oldY)
+
+                    Log.e(TAG, "moveX >> " + moveX)
+                    Log.e(TAG, "moveY >> " + moveY)
+
+                    if (moveX > 20) {
+                        helper.itemView.isPressed = false
+                        leftItem?.isPressed = false
+                    }
+                }
+            }
+            false
         }
+
     }
 }

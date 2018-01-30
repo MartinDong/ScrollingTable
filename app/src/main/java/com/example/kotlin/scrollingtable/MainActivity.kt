@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
 
         mLeftAdapter = RvAdapter()
         mLeftDataList = mutableListOf()
-        for (index in 1..20) {
-            mLeftDataList!!.add("股票$index")
+        for (index in 1..40) {
+            mLeftDataList!!.add("股票名称$index")
         }
         mLeftAdapter!!.setNewData(mLeftDataList)
         rv_list_left.adapter = mLeftAdapter
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         mRightAdapter = RvAdapter()
         mRightDataList = mutableListOf()
-        for (produceIndex in 1..20) {
+        for (produceIndex in 1..40) {
             for (priceIndex in 1..5) {
                 mRightDataList!!.add("股票${produceIndex}价格-${priceIndex}")
             }

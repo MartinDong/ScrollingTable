@@ -9,7 +9,7 @@ import com.example.kotlin.scrollingtable.type1.model.Type1PriceModel
  * 每一行的股票信息，第一条是股票名称，之后的是价格信息
  * Created by kotlin on 18-1-29.
  */
-class RvType1RightAdapter : BaseQuickAdapter<Type1PriceModel, BaseViewHolder>(R.layout.item_layout_main) {
+class RvType1RightAdapter : BaseQuickAdapter<Type1PriceModel, BaseViewHolder>(R.layout.item_layout_type1) {
     private var TAG = RvType1RightAdapter::class.java.name
 
     var rvRvMainLeftAdapter: RvType1LeftAdapter? = null

@@ -12,7 +12,7 @@ import com.example.kotlin.scrollingtable.type2.model.Type2Model
  * 每一行的股票信息，第一条是股票名称，之后的是价格信息
  * Created by kotlin on 18-1-29.
  */
-class RvType2Adapter : BaseQuickAdapter<Type2Model, BaseViewHolder>(R.layout.item_product_layout) {
+class RvType2Adapter : BaseQuickAdapter<Type2Model, BaseViewHolder>(R.layout.item_layout_type2) {
     private var TAG = RvType2Adapter::class.java.name
 
     private var onScrollListener: RecyclerView.OnScrollListener? = null

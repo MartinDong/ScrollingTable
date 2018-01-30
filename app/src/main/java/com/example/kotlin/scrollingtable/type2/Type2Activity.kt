@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type2.model.Type2Model
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_type1.*
 
 class Type2Activity : AppCompatActivity() {
 
@@ -16,7 +16,7 @@ class Type2Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_type1)
 
         mProductAdapter = RvType2Adapter()
         mProductDataList = mutableListOf()

@@ -7,7 +7,7 @@ import android.util.Log
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type1.model.Type1PriceModel
 import com.example.kotlin.scrollingtable.type1.model.Type1ProductModel
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_type1.*
 
 class Type1Activity : AppCompatActivity() {
     private var TAG = Type1Activity::class.java.name
@@ -20,7 +20,7 @@ class Type1Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_type1)
 
         mLeftAdapter = RvType1LeftAdapter()
         mRightAdapter = RvType1RightAdapter()

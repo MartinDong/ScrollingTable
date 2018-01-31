@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Created by xiaoyulaoshi on 2018/1/31.
- * * 自定义的 滚动控件
+ * 自定义的 滚动控件
  * 重载了 {@link SyncHScrollView#onScrollChanged}（滚动条变化）,监听每次的变化通知给观察(此变化的)观察者
  * 可使用 {@link SyncHScrollView#AddOnScrollChangedListener(SyncHScrollView.OnScrollChangedListener) } 来订阅本控件的 滚动条变化
  */

@@ -1,4 +1,4 @@
-package com.example.kotlin.scrollingtable.type5.view
+package com.example.kotlin.scrollingtable.type4.view
 
 import android.content.Context
 import android.util.AttributeSet
@@ -12,7 +12,7 @@ import android.widget.LinearLayout
  * Created by xiaoyulaoshi on 2018/1/31.
  */
 
-class InterceptScrollLinerLayout : LinearLayout {
+class InterceptScrollContainer : LinearLayout {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
 
@@ -20,7 +20,7 @@ class InterceptScrollLinerLayout : LinearLayout {
 
     /**
      * 拦截TouchEvent
-     * @see android.view.ViewGroup#onInterceptTouchEvent(android.view.MotionEvent)
+     * @see android.view.ViewGroup.onInterceptTouchEvent(android.view.MotionEvent)
      */
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         Log.i(TAG, "onInterceptTouchEvent" + ev)
@@ -28,6 +28,6 @@ class InterceptScrollLinerLayout : LinearLayout {
     }
 
     companion object {
-        private val TAG = InterceptScrollLinerLayout::class.java.name
+        private val TAG = InterceptScrollContainer::class.java.name
     }
 }

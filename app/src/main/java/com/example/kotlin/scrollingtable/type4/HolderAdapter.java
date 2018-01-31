@@ -21,7 +21,7 @@ import com.example.kotlin.scrollingtable.type4.model.Data;
 import java.util.List;
 
 public class HolderAdapter extends BaseAdapter {
-    private static final String TAG = "HolderAdapter";
+    private static final String TAG = HolderAdapter.class.getName();
 
     /**
      * List中的数据

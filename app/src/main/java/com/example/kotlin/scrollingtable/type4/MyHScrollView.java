@@ -1,22 +1,20 @@
 package com.example.kotlin.scrollingtable.type4;
 
-/**
- * Created by xiaoyulaoshi on 2018/1/31.
- */
-
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.HorizontalScrollView;
 
-/*
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by xiaoyulaoshi on 2018/1/31.
+ * <p>
  * 自定义的 滚动控件
- * 重载了 onScrollChanged（滚动条变化）,监听每次的变化通知给 观察(此变化的)观察者
- * 可使用 AddOnScrollChangedListener 来订阅本控件的 滚动条变化
- * */
+ * 重载了 {@link MyHScrollView#onScrollChanged}（滚动条变化）,监听每次的变化通知给观察(此变化的)观察者
+ * 可使用 {@link MyHScrollView#AddOnScrollChangedListener(OnScrollChangedListener) } 来订阅本控件的 滚动条变化
+ */
 public class MyHScrollView extends HorizontalScrollView {
     ScrollViewObserver mScrollViewObserver = new ScrollViewObserver();
 
@@ -35,13 +33,12 @@ public class MyHScrollView extends HorizontalScrollView {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         return super.onTouchEvent(ev);
-        //return false;
     }
 
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-		/*
-		 * 当滚动条移动后，引发 滚动事件。通知给观察者，观察者会传达给其他的。
+        /*
+         * 当滚动条移动后，引发 滚动事件。通知给观察者，观察者会传达给其他的条目中的滚动视图。
 		 */
         if (mScrollViewObserver != null) {
             mScrollViewObserver.NotifyOnScrollChanged(l, t, oldl, oldt);
@@ -70,7 +67,7 @@ public class MyHScrollView extends HorizontalScrollView {
         public void onScrollChanged(int l, int t, int oldl, int oldt);
     }
 
-    /*
+    /**
      * 观察者
      */
     public static class ScrollViewObserver {

@@ -1,22 +1,22 @@
-package com.example.kotlin.scrollingtable.type2
+package com.example.kotlin.scrollingtable.type5
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.example.kotlin.scrollingtable.R
+import com.example.kotlin.scrollingtable.type2.RvType2Adapter
 import com.example.kotlin.scrollingtable.type2.model.Type2Model
-import kotlinx.android.synthetic.main.activity_type2.*
+import kotlinx.android.synthetic.main.activity_type5.*
 
-class Type2Activity : AppCompatActivity() {
-
-    private var TAG = Type2Activity::class.java.name
+class Type5Activity : AppCompatActivity() {
+    private var TAG = Type5Activity::class.java.name
 
     private var mProductAdapter: RvType2Adapter? = null
     private var mProductDataList: MutableList<Type2Model>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_type2)
+        setContentView(R.layout.activity_type5)
 
         mProductAdapter = RvType2Adapter()
         mProductDataList = mutableListOf()

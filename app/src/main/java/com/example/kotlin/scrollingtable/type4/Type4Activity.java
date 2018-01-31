@@ -37,7 +37,7 @@ public class Type4Activity extends Activity implements OnScrollListener {
     private int last_item_position;// 最后item的位置
     private boolean isLoading = false;// 是否加载过,控制加载次数
     private int currentPage = 1;// 当前页,默认为1
-    private int pageSize = 20;// 每页显示十条信息
+    private int pageSize = 30;// 每页显示十条信息
     private View loadingView;// 加载视图的布局
 
     public void onCreate(Bundle savedInstanceState) {

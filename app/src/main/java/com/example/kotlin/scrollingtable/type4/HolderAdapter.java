@@ -104,13 +104,12 @@ public class HolderAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.txt1.setText(currentData.get(position).getStr1());
-        holder.txt2.setText(currentData.get(position).getStr2());
-        holder.txt3.setText(currentData.get(position).getStr3());
-        holder.txt4.setText(currentData.get(position).getStr4());
-        holder.txt5.setText(currentData.get(position).getStr5());
-        holder.txt6.setText(currentData.get(position).getStr6());
-        holder.txt7.setText(currentData.get(position).getStr7());
-
+        holder.txt2.setText(currentData.get(position).getStr1() + currentData.get(position).getStr2());
+        holder.txt3.setText(currentData.get(position).getStr1() + currentData.get(position).getStr3());
+        holder.txt4.setText(currentData.get(position).getStr1() + currentData.get(position).getStr4());
+        holder.txt5.setText(currentData.get(position).getStr1() + currentData.get(position).getStr5());
+        holder.txt6.setText(currentData.get(position).getStr1() + currentData.get(position).getStr6());
+        holder.txt7.setText(currentData.get(position).getStr1() + currentData.get(position).getStr7());
         return convertView;
     }
 

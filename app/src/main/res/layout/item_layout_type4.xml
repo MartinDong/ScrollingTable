@@ -2,19 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/selector_bg_blue"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:text="Column1"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFFFFF" />
+        android:textColor="#333333" />
 
     <com.example.kotlin.scrollingtable.type4.view.InterceptScrollContainer
         android:id="@+id/scroollContainter"
@@ -41,51 +40,45 @@
 
                 <TextView
                     android:id="@+id/textView2"
-                    android:layout_width="120dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Column2"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#333333" />
 
                 <TextView
                     android:id="@+id/textView3"
-                    android:layout_width="120dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Column3"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#333333" />
 
                 <TextView
                     android:id="@+id/textView4"
-                    android:layout_width="120dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Column4"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#333333" />
 
                 <TextView
                     android:id="@+id/textView5"
-                    android:layout_width="120dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Column5"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#333333" />
 
                 <TextView
                     android:id="@+id/textView6"
-                    android:layout_width="120dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Column6"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#333333" />
 
                 <TextView
                     android:id="@+id/textView7"
-                    android:layout_width="120dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Column7"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#333333" />
             </LinearLayout>
         </com.example.kotlin.scrollingtable.type4.view.MyHScrollView>
     </com.example.kotlin.scrollingtable.type4.view.InterceptScrollContainer>

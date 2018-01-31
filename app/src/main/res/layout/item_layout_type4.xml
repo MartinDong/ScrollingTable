@@ -9,11 +9,9 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="80dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:text="Column1"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#FFFFFF" />
@@ -43,60 +41,48 @@
 
                 <TextView
                     android:id="@+id/textView2"
-                    android:layout_width="80dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:text="Column2"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#FFFFFF" />
 
                 <TextView
                     android:id="@+id/textView3"
-                    android:layout_width="80dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:text="Column3"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#FFFFFF" />
 
                 <TextView
                     android:id="@+id/textView4"
-                    android:layout_width="80dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:text="Column4"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#FFFFFF" />
 
                 <TextView
                     android:id="@+id/textView5"
-                    android:layout_width="80dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:text="Column5"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#FFFFFF" />
 
                 <TextView
                     android:id="@+id/textView6"
-                    android:layout_width="80dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:text="Column6"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#FFFFFF" />
 
                 <TextView
                     android:id="@+id/textView7"
-                    android:layout_width="80dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
                     android:text="Column7"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#FFFFFF" />

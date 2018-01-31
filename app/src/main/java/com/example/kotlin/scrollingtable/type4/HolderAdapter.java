@@ -93,6 +93,8 @@ public class HolderAdapter extends BaseAdapter {
             holder.txt3 = convertView.findViewById(R.id.textView3);
             holder.txt4 = convertView.findViewById(R.id.textView4);
             holder.txt5 = convertView.findViewById(R.id.textView5);
+            holder.txt6 = convertView.findViewById(R.id.textView6);
+            holder.txt7 = convertView.findViewById(R.id.textView7);
 
             MyHScrollView headScrollView = mHead.findViewById(R.id.horizontalScrollView1);
             headScrollView.AddOnScrollChangedListener(new OnScrollChangedListenerImp(scrollView1));
@@ -101,11 +103,13 @@ public class HolderAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.txt1.setText(currentData.get(position).getStr1() + 1 + "列");
-        holder.txt2.setText(currentData.get(position).getStr1() + 2 + "列");
-        holder.txt3.setText(currentData.get(position).getStr1() + 3 + "列");
-        holder.txt4.setText(currentData.get(position).getStr1() + 4 + "列");
-        holder.txt5.setText(currentData.get(position).getStr1() + 5 + "列");
+        holder.txt1.setText(currentData.get(position).getStr1());
+        holder.txt2.setText(currentData.get(position).getStr2());
+        holder.txt3.setText(currentData.get(position).getStr3());
+        holder.txt4.setText(currentData.get(position).getStr4());
+        holder.txt5.setText(currentData.get(position).getStr5());
+        holder.txt6.setText(currentData.get(position).getStr6());
+        holder.txt7.setText(currentData.get(position).getStr7());
 
         return convertView;
     }
@@ -128,6 +132,8 @@ public class HolderAdapter extends BaseAdapter {
         TextView txt3;
         TextView txt4;
         TextView txt5;
+        TextView txt6;
+        TextView txt7;
         HorizontalScrollView scrollView;
     }
 

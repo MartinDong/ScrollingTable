@@ -48,14 +48,14 @@ public class Type4Activity extends Activity {
         List<Data> currentData = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             Data data = new Data();
-            data.setStr1("股票名称>>" + i);
-            data.setStr2(i + "<<价格>>1");
-            data.setStr3(i + "<<价格>>2");
-            data.setStr4(i + "<<价格>>3");
-            data.setStr5(i + "<<价格>>4");
-            data.setStr6(i + "<<价格>>5");
-            data.setStr7(i + "<<价格>>6");
-            data.setStr8(i + "<<价格>>7");
+            data.setStr1("股票>>" + i);
+            data.setStr2("价格>>1");
+            data.setStr3("价格>>2");
+            data.setStr4("价格>>3");
+            data.setStr5("价格>>4");
+            data.setStr6("价格>>5");
+            data.setStr7("价格>>6");
+            data.setStr8("价格>>7");
             currentData.add(data);
         }
 

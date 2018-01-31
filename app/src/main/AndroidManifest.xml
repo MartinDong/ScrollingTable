@@ -24,6 +24,13 @@
             </intent-filter>-->
         </activity>
         <activity android:name=".type3.Type3Activity">
+            <!-- <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>-->
+        </activity>
+        <activity android:name=".type4.Type4Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

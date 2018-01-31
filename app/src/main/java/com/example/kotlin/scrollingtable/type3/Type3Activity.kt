@@ -7,7 +7,6 @@ import android.util.Log
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type3.model.Type3PriceModel
 import com.example.kotlin.scrollingtable.type3.model.Type3ProductModel
-import com.example.kotlin.scrollingtable.type3.view.MyHorizontalScrollView
 import kotlinx.android.synthetic.main.activity_type3.*
 
 class Type3Activity : AppCompatActivity() {
@@ -77,15 +76,5 @@ class Type3Activity : AppCompatActivity() {
             }
         })
 
-        hcv_right.setScrollViewListener {
-            object : MyHorizontalScrollView.ScrollViewListener {
-                override fun onScrollChanged(scrollType: MyHorizontalScrollView.ScrollType) {
-                    if (scrollType == MyHorizontalScrollView.ScrollType.FLING ||
-                            scrollType == MyHorizontalScrollView.ScrollType.TOUCH_SCROLL) {
-
-                    }
-                }
-            }
-        }
     }
 }

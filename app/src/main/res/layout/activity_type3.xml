@@ -15,7 +15,7 @@
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/item_layout" />
 
-    <com.example.kotlin.scrollingtable.type3.view.MyHorizontalScrollView
+    <HorizontalScrollView
         android:id="@+id/hcv_right"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,6 +30,6 @@
             android:overScrollMode="never"
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/item_layout" />
-    </com.example.kotlin.scrollingtable.type3.view.MyHorizontalScrollView>
+    </HorizontalScrollView>
 
 </LinearLayout>

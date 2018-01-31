@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_item"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@drawable/selector_bg_white"
     android:descendantFocusability="blocksDescendants"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
@@ -24,18 +20,68 @@
 
     <com.example.kotlin.scrollingtable.type5.view.InterceptScrollLinerLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusable="false">
 
-        <com.example.kotlin.scrollingtable.type5.view.SyncRecyclerView
-            android:id="@+id/rv_list_right"
-            android:layout_width="match_parent"
+        <com.example.kotlin.scrollingtable.type5.view.SyncHScrollView
+            android:id="@+id/hsv_list_right"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:clickable="false"
             android:focusable="false"
-            android:orientation="horizontal"
-            android:overScrollMode="never"
-            app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/item_layout" />
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:text="测试数据"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:text="测试数据"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:text="测试数据"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:text="测试数据"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_10"
+                    android:text="测试数据"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+        </com.example.kotlin.scrollingtable.type5.view.SyncHScrollView>
 
     </com.example.kotlin.scrollingtable.type5.view.InterceptScrollLinerLayout>
 </LinearLayout>

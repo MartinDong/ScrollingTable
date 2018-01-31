@@ -4,7 +4,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type2.model.Type2Model
-import com.example.kotlin.scrollingtable.type5.view.SyncRecyclerView
+import com.example.kotlin.scrollingtable.type5.view.SyncHScrollView
 
 /**
  * 每一行的股票信息，第一条是股票名称，之后的是价格信息
@@ -12,7 +12,7 @@ import com.example.kotlin.scrollingtable.type5.view.SyncRecyclerView
  */
 class RvType5Adapter(
         //列表头部需要进行横向滑动关联
-        var mHeadSyncRecyclerView: SyncRecyclerView
+        var mHeadSyncRecyclerView: SyncHScrollView
 ) : BaseQuickAdapter<Type2Model, BaseViewHolder>(R.layout.item_layout_type5) {
     private var TAG = RvType5Adapter::class.java.name
 
@@ -28,21 +28,23 @@ class RvType5Adapter(
         rightAdapter.setNewData(item.mPriceList)
 
         //右侧横向列表
-        val itemRecyclerView = helper.getView<SyncRecyclerView>(R.id.rv_list_right)
-        //添加数据绑定
-        itemRecyclerView.adapter = rightAdapter
-
+        val itemRecyclerView = helper.getView<SyncHScrollView>(R.id.hsv_list_right)
 
         //添加滑动观察者
-        mHeadSyncRecyclerView.addOnScrollChangeListener(OnScrollChangedListenerImp(itemRecyclerView))
+        mHeadSyncRecyclerView.AddOnScrollChangedListener(OnScrollChangedListenerImp(itemRecyclerView))
+
+        //TODO 这里如果设置了点击事件会与设置到RecycleView的OnTouchListener冲突
+//        helper.itemView.setOnClickListener {
+//
+//        }
 
     }
 
-    internal inner class OnScrollChangedListenerImp(var mScrollViewArg: SyncRecyclerView) :
-            SyncRecyclerView.OnScrollChangeListener {
+    internal inner class OnScrollChangedListenerImp(var mScrollViewArg: SyncHScrollView) :
+            SyncHScrollView.OnScrollChangedListener {
 
-        override fun onScrollChanged(dx: Int, dy: Int) {
-            mScrollViewArg.smoothScrollBy(dx, dy)
+        override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
+            mScrollViewArg.smoothScrollTo(l, t)
         }
     }
 }

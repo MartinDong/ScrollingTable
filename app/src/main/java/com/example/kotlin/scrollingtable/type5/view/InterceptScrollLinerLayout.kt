@@ -23,7 +23,7 @@ class InterceptScrollLinerLayout : LinearLayout {
      */
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         Log.i(TAG, "onInterceptTouchEvent" + ev)
-        return false
+        return true
     }
 
     companion object {

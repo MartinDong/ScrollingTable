@@ -2,12 +2,12 @@ package com.example.kotlin.scrollingtable.type5
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type2.model.Type2Model
 import kotlinx.android.synthetic.main.activity_type5.*
-import kotlinx.android.synthetic.main.item_layout_type5_head.*
+import kotlinx.android.synthetic.main.item_layout_type5.*
 
 
 class Type5Activity : AppCompatActivity() {
@@ -28,9 +28,16 @@ class Type5Activity : AppCompatActivity() {
 
         val headRightAdapter = RvType5RightAdapter()
         headRightAdapter.setNewData(rightTitleList)
-        rv_list_right.adapter = headRightAdapter
+//        rv_list_right.adapter = headRightAdapter
 
-        mProductAdapter = RvType5Adapter(rv_list_right)
+        layout_head.isFocusable = true
+        layout_head.isClickable = true
+
+        layout_head.setOnTouchListener(ListViewAndHeadViewTouchListener())
+        rv_list_product.setOnTouchListener(ListViewAndHeadViewTouchListener())
+
+
+        mProductAdapter = RvType5Adapter(hsv_list_right)
         mProductDataList = mutableListOf()
         for (index in 0..40) {
             val productModel = Type2Model()
@@ -47,27 +54,20 @@ class Type5Activity : AppCompatActivity() {
         mProductAdapter!!.setNewData(mProductDataList)
         rv_list_product.adapter = mProductAdapter
 
-        mProductAdapter?.setOnItemClickListener { adapter, view, position ->
-            Log.d(TAG, "position>>" + position)
+        //TODO 这里如果设置了点击事件会与设置到RecycleView的OnTouchListener冲突
+//        mProductAdapter?.setOnItemClickListener { adapter, view, position ->
+//            Log.d(TAG, "position>>" + position)
+//        }
+
+    }
+
+    internal inner class ListViewAndHeadViewTouchListener : View.OnTouchListener {
+
+        override fun onTouch(arg0: View, event: MotionEvent): Boolean {
+            // 当在列头 和 listView控件上touch时，将这个touch的事件分发给 ScrollView
+            val headScrollView = hsv_list_right
+            headScrollView.onTouchEvent(event)
+            return false
         }
-
-
-        rv_list_product.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                /*
-                new State
-                0（SCROLL_STATE_IDLE）表示recyclerview是不动的（The RecyclerView is not currently scrolling.）
-                1（SCROLL_STATE_DRAGGING）表示recyclerview正在被拖拽（The RecyclerView is currently being dragged by outside input such as user touch input.）
-                2（SCROLL_STATE_SETTLING）表示recyclerview正在惯性下滚动（The RecyclerView is currently animating to a final position while not under outside control.）
-                 */
-                when (newState) {
-                    0 -> println("recyclerview已经停止滚动")
-                    1 -> println("recyclerview正在被拖拽")
-                    2 -> println("recyclerview正在依靠惯性滚动")
-                }
-            }
-        })
     }
 }

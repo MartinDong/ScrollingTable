@@ -31,11 +31,13 @@ class Type4Activity : Activity() {
         mHead = findViewById(R.id.head)
         mHead.isFocusable = true
         mHead.isClickable = true
-        mHead.setOnTouchListener(ListViewAndHeadViewTouchLinstener())
+
+        //TODO 划重点：这里需要从传入的列表头拿到里面的右侧滑动控件
+        mHead.setOnTouchListener(ListViewAndHeadViewTouchListener())
 
 
-        mListView1 = findViewById(R.id.listView1)
-        mListView1.setOnTouchListener(ListViewAndHeadViewTouchLinstener())
+        mListView1 = findViewById(R.id.lv_produce)
+        mListView1.setOnTouchListener(ListViewAndHeadViewTouchListener())
 
         // 创建当前用于显示视图的数据
         val currentData = ArrayList<Data>()
@@ -64,12 +66,15 @@ class Type4Activity : Activity() {
 
     }
 
-    internal inner class ListViewAndHeadViewTouchLinstener : View.OnTouchListener {
+    /**
+     * TODO 划重点：用来将头部和列表上面的触摸事件都分发给头部的滑动控件
+     */
+    internal inner class ListViewAndHeadViewTouchListener : View.OnTouchListener {
 
         override fun onTouch(arg0: View, arg1: MotionEvent): Boolean {
             // 当在列头 和 listView控件上touch时，将这个touch的事件分发给 ScrollView
-            val headSrcrollView = mHead.findViewById<HorizontalScrollView>(R.id.horizontalScrollView1)
-            headSrcrollView.onTouchEvent(arg1)
+            val headScrollView = mHead.findViewById<HorizontalScrollView>(R.id.horizontalScrollView1)
+            headScrollView.onTouchEvent(arg1)
             return false
         }
     }

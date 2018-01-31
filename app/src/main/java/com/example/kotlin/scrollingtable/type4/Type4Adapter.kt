@@ -22,17 +22,17 @@ import com.example.kotlin.scrollingtable.type4.view.SyncHScrollView
  */
 class Type4Adapter(context: Context,
                    /**
-                     * layout ID
-                     */
-                    private val id_row_layout: Int,
+                    * layout ID
+                    */
+                   private val id_row_layout: Int,
                    /**
-                     * List中的数据
-                     */
-                    private val currentData: MutableList<Data>,
+                    * List中的数据
+                    */
+                   private val currentData: MutableList<Data>,
                    /**
-                     * ListView头部
-                     */
-                    private val mHead: RelativeLayout) : BaseAdapter() {
+                    * ListView头部
+                    */
+                   private val mHead: RelativeLayout) : BaseAdapter() {
     private val mInflater: LayoutInflater
 
 
@@ -80,8 +80,16 @@ class Type4Adapter(context: Context,
             convertView = mInflater.inflate(id_row_layout, null)
             holder = ViewHolder()
 
+            //获取当前条目中的右侧滑动控件
             val scrollView1 = convertView!!.findViewById<SyncHScrollView>(R.id.horizontalScrollView1)
 
+            //TODO 划重点：这里需要从传入的列表头拿到里面的右侧滑动控件
+            val headScrollView = mHead.findViewById<SyncHScrollView>(R.id.horizontalScrollView1)
+            //将当前条目的右侧滑动控件添加到头部滑动控件的滑动观察者集合中
+            headScrollView.AddOnScrollChangedListener(OnScrollChangedListenerImp(scrollView1))
+
+
+            //进行holder的初始化操作
             holder.scrollView = scrollView1
             holder.txt1 = convertView.findViewById(R.id.textView1)
             holder.txt2 = convertView.findViewById(R.id.textView2)
@@ -90,9 +98,6 @@ class Type4Adapter(context: Context,
             holder.txt5 = convertView.findViewById(R.id.textView5)
             holder.txt6 = convertView.findViewById(R.id.textView6)
             holder.txt7 = convertView.findViewById(R.id.textView7)
-
-            val headScrollView = mHead.findViewById<SyncHScrollView>(R.id.horizontalScrollView1)
-            headScrollView.AddOnScrollChangedListener(OnScrollChangedListenerImp(scrollView1))
 
             convertView.tag = holder
         } else {
@@ -108,7 +113,8 @@ class Type4Adapter(context: Context,
         return convertView
     }
 
-    internal inner class OnScrollChangedListenerImp(var mScrollViewArg: SyncHScrollView) : SyncHScrollView.OnScrollChangedListener {
+    internal inner class OnScrollChangedListenerImp(var mScrollViewArg: SyncHScrollView) :
+            SyncHScrollView.OnScrollChangedListener {
 
         override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
             mScrollViewArg.smoothScrollTo(l, t)

@@ -17,7 +17,8 @@ import com.example.kotlin.scrollingtable.type3.model.Type3ProductModel
 class RvType3RightAdapter : BaseQuickAdapter<Type3ProductModel, BaseViewHolder>(R.layout.item_layout_type3) {
     private var TAG = RvType3RightAdapter::class.java.name
 
-    var rvLeftLinearLayoutManager: LinearLayoutManager? = null
+    var mLeftLinearLayoutManager: LinearLayoutManager? = null
+    var mRvType3LeftAdapter: RvType3LeftAdapter? = null
 
     override fun convert(helper: BaseViewHolder, item: Type3ProductModel) {
         //当前的条目位置信息
@@ -33,40 +34,26 @@ class RvType3RightAdapter : BaseQuickAdapter<Type3ProductModel, BaseViewHolder>(
         }
 
 
-        val leftItem = rvLeftLinearLayoutManager?.findViewByPosition(productPosition)
+        helper.itemView.isPressed = item.isPressed
 
-        var oldX = 0f
-        var oldY = 0f
 
         helper.itemView.setOnTouchListener { view, event ->
+            Log.d(TAG, "event >>>> " + event.action)
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    oldX = event.x
-                    oldY = event.y
-
                     helper.itemView.isPressed = true
-                    leftItem?.isPressed = true
+                    item.isPressed = true
                 }
                 MotionEvent.ACTION_UP -> {
                     helper.itemView.isPressed = false
-                    leftItem?.isPressed = false
+                    item.isPressed = false
                 }
-                MotionEvent.ACTION_MOVE -> {
-                    val newX = event.x
-                    val newY = event.y
-
-                    val moveX = Math.abs(newX - oldX)
-                    val moveY = Math.abs(newY - oldY)
-
-                    Log.e(TAG, "moveX >> " + moveX)
-                    Log.e(TAG, "moveY >> " + moveY)
-
-                    if (moveX > 20) {
-                        helper.itemView.isPressed = false
-                        leftItem?.isPressed = false
-                    }
+                MotionEvent.ACTION_CANCEL -> {
+                    helper.itemView.isPressed = false
+                    item.isPressed = false
                 }
             }
+            mRvType3LeftAdapter?.notifyItemChanged(productPosition)
             false
         }
 

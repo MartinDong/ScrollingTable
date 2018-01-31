@@ -2,13 +2,13 @@ package com.example.kotlin.scrollingtable.type3
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type3.model.Type3PriceModel
 import com.example.kotlin.scrollingtable.type3.model.Type3ProductModel
-import kotlinx.android.synthetic.main.activity_type1.*
+import com.example.kotlin.scrollingtable.type3.view.MyHorizontalScrollView
+import kotlinx.android.synthetic.main.activity_type3.*
 
 class Type3Activity : AppCompatActivity() {
     private var TAG = Type3Activity::class.java.name
@@ -48,8 +48,8 @@ class Type3Activity : AppCompatActivity() {
         mRightAdapter!!.setNewData(mDataList)
         rv_list_right.adapter = mRightAdapter
 
-        mLeftAdapter!!.rvRightLinearLayoutManager = rv_list_right.layoutManager as LinearLayoutManager
-        mRightAdapter!!.rvLeftLinearLayoutManager = rv_list_left.layoutManager as LinearLayoutManager
+        mLeftAdapter!!.mRvType3RightAdapter = mRightAdapter
+        mRightAdapter!!.mRvType3LeftAdapter = mLeftAdapter
 
         //注册条目点击监听
         mLeftAdapter?.setOnItemClickListener { adapter, view, position ->
@@ -77,6 +77,15 @@ class Type3Activity : AppCompatActivity() {
             }
         })
 
+        hcv_right.setScrollViewListener {
+            object : MyHorizontalScrollView.ScrollViewListener {
+                override fun onScrollChanged(scrollType: MyHorizontalScrollView.ScrollType) {
+                    if (scrollType == MyHorizontalScrollView.ScrollType.FLING ||
+                            scrollType == MyHorizontalScrollView.ScrollType.TOUCH_SCROLL) {
 
+                    }
+                }
+            }
+        }
     }
 }

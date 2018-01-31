@@ -1,6 +1,7 @@
 package com.example.kotlin.scrollingtable.type3
 
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.MotionEvent
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -14,7 +15,8 @@ import com.example.kotlin.scrollingtable.type3.model.Type3ProductModel
 class RvType3LeftAdapter : BaseQuickAdapter<Type3ProductModel, BaseViewHolder>(R.layout.item_layout_type1) {
     private var TAG = RvType3LeftAdapter::class.java.name
 
-    var rvRightLinearLayoutManager: LinearLayoutManager? = null
+    var mRightLinearLayoutManager: LinearLayoutManager? = null
+    var mRvType3RightAdapter: RvType3RightAdapter? = null
 
     override fun convert(helper: BaseViewHolder, item: Type3ProductModel) {
         //当前的条目位置信息
@@ -22,23 +24,26 @@ class RvType3LeftAdapter : BaseQuickAdapter<Type3ProductModel, BaseViewHolder>(R
 
         helper.setText(R.id.tv_data, item.productName)
 
-        val rightItem = rvRightLinearLayoutManager?.findViewByPosition(productPosition)
+        helper.itemView.isPressed = item.isPressed
 
         helper.itemView.setOnTouchListener { view, event ->
+            Log.d(TAG, "event >>>> " + event.action)
+
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     helper.itemView.isPressed = true
-                    rightItem?.isPressed = true
+                    item.isPressed = true
                 }
                 MotionEvent.ACTION_UP -> {
                     helper.itemView.isPressed = false
-                    rightItem?.isPressed = false
+                    item.isPressed = false
                 }
-                MotionEvent.ACTION_MOVE -> {
+                MotionEvent.ACTION_CANCEL -> {
                     helper.itemView.isPressed = false
-                    rightItem?.isPressed = false
+                    item.isPressed = false
                 }
             }
+            mRvType3RightAdapter?.notifyItemChanged(productPosition)
             false
         }
 

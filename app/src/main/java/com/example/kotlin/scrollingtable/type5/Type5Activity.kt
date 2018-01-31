@@ -2,8 +2,11 @@ package com.example.kotlin.scrollingtable.type5
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type2.model.Type2Model
 import kotlinx.android.synthetic.main.activity_type5.*
@@ -21,14 +24,11 @@ class Type5Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_type5)
 
-        val rightTitleList: MutableList<String> = mutableListOf()
         for (indexTitle in 0..5) {
-            rightTitleList.add("表头》${indexTitle}")
+            val titleView = LayoutInflater.from(this).inflate(R.layout.item_layout, null)
+            titleView.findViewById<TextView>(R.id.tv_data).text = "表头》${indexTitle}"
+            ll_item.addView(titleView)
         }
-
-        val headRightAdapter = RvType5RightAdapter()
-        headRightAdapter.setNewData(rightTitleList)
-//        rv_list_right.adapter = headRightAdapter
 
         layout_head.isFocusable = true
         layout_head.isClickable = true
@@ -55,9 +55,9 @@ class Type5Activity : AppCompatActivity() {
         rv_list_product.adapter = mProductAdapter
 
         //TODO 这里如果设置了点击事件会与设置到RecycleView的OnTouchListener冲突
-//        mProductAdapter?.setOnItemClickListener { adapter, view, position ->
-//            Log.d(TAG, "position>>" + position)
-//        }
+        mProductAdapter?.setOnItemClickListener { adapter, view, position ->
+            Log.d(TAG, "position>>" + position)
+        }
 
     }
 

@@ -7,8 +7,8 @@
 
     <TextView
         android:id="@+id/tv_data"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
         android:gravity="center"
         android:padding="@dimen/dp_10"
         android:text="测试数据"

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
  */
 
 public class SyncRecyclerView extends RecyclerView {
+
+    private final String TAG = SyncRecyclerView.class.getName();
 
     //观察者
     private SyncRecyclerViewObserver mSyncRecyclerViewObserver = new SyncRecyclerViewObserver();
@@ -31,15 +35,26 @@ public class SyncRecyclerView extends RecyclerView {
         super(context, attrs, defStyle);
     }
 
+
     @Override
-    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        //将发生的滑动改变通知到观察者中的每一个滑动监听
-        if (mSyncRecyclerViewObserver != null) {
-            mSyncRecyclerViewObserver.notifyOnScrollChange(l, t, oldl, oldt);
-        }
-        super.onScrollChanged(l, t, oldl, oldt);
+    public boolean onTouchEvent(MotionEvent e) {
+        return super.onTouchEvent(e);
     }
 
+    @Override
+    public void onScrolled(int dx, int dy) {
+        Log.i(TAG, "onScrolled >> dx=" + dx + "\tdy=" + dy);
+        //将发生的滑动改变通知到观察者中的每一个滑动监听
+        if (mSyncRecyclerViewObserver != null) {
+            mSyncRecyclerViewObserver.notifyOnScrollChange(dx, dy);
+        }
+        super.onScrolled(dx, dy);
+    }
+
+    @Override
+    protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
+        super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
+    }
 
     /**
      * 向观察者中添加 当前控件的滑动事件监听
@@ -61,7 +76,7 @@ public class SyncRecyclerView extends RecyclerView {
      * 自定义滑动监听
      */
     public interface OnScrollChangeListener {
-        void onScrollChanged(int l, int t, int oldl, int oldt);
+        void onScrollChanged(int dx, int dy);
     }
 
     /**
@@ -96,13 +111,8 @@ public class SyncRecyclerView extends RecyclerView {
 
         /**
          * 广播滑动改变，通知到每一个滑动监听器
-         *
-         * @param l    Current horizontal scroll origin. 当前水平滑动源点
-         * @param t    Current vertical scroll origin.   当前垂直滑动源点
-         * @param oldl Previous horizontal scroll origin.之前的水平滑动源点
-         * @param oldt Previous vertical scroll origin.  之前的垂直滑动源点
          */
-        public void notifyOnScrollChange(int l, int t, int oldl, int oldt) {
+        public void notifyOnScrollChange(int dx, int dy) {
             if (mList == null || mList.size() == 0) {
                 return;
             }
@@ -110,7 +120,7 @@ public class SyncRecyclerView extends RecyclerView {
             //循环通知每一个滑动监听器
             for (int i = 0; i < mList.size(); i++) {
                 if (mList.get(i) != null) {
-                    mList.get(i).onScrollChanged(l, t, oldl, oldt);
+                    mList.get(i).onScrollChanged(dx, dy);
                 }
             }
         }

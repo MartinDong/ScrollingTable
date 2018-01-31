@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/layout_head"
-        layout="@layout/item_layout_type5" />
+        layout="@layout/item_layout_type5_head" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_list_product"

@@ -32,12 +32,17 @@ class RvType5Adapter(
         //添加数据绑定
         itemRecyclerView.adapter = rightAdapter
 
-        //添加滑动观察者
-        mHeadSyncRecyclerView.addOnScrollChangeListener(object : SyncRecyclerView.OnScrollChangeListener {
-            override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
-                itemRecyclerView.scrollBy(l, t)
-            }
-        })
 
+        //添加滑动观察者
+        mHeadSyncRecyclerView.addOnScrollChangeListener(OnScrollChangedListenerImp(itemRecyclerView))
+
+    }
+
+    internal inner class OnScrollChangedListenerImp(var mScrollViewArg: SyncRecyclerView) :
+            SyncRecyclerView.OnScrollChangeListener {
+
+        override fun onScrollChanged(dx: Int, dy: Int) {
+            mScrollViewArg.smoothScrollBy(dx, dy)
+        }
     }
 }

@@ -52,17 +52,14 @@ public class HolderAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        // TODO Auto-generated method stub
         return this.currentData.size();
     }
 
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -134,8 +131,6 @@ public class HolderAdapter extends BaseAdapter {
             mScrollViewArg.smoothScrollTo(l, t);
         }
     }
-
-    ;
 
     class ViewHolder {
         TextView txt1;

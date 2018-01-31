@@ -22,17 +22,14 @@ public class MyHScrollView extends HorizontalScrollView {
 
     public MyHScrollView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        // TODO Auto-generated constructor stub
     }
 
     public MyHScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // TODO Auto-generated constructor stub
     }
 
     public MyHScrollView(Context context) {
         super(context);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
@@ -81,7 +78,7 @@ public class MyHScrollView extends HorizontalScrollView {
 
         public ScrollViewObserver() {
             super();
-            mList = new ArrayList<OnScrollChangedListener>();
+            mList = new ArrayList<>();
         }
 
         public void AddOnScrollChangedListener(OnScrollChangedListener listener) {

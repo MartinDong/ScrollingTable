@@ -1,10 +1,6 @@
 package com.example.kotlin.scrollingtable.type4;
 
 
-import java.util.List;
-
-
-
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,17 +10,19 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import android.widget.AbsListView.OnScrollListener;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.kotlin.scrollingtable.R;
 import com.example.kotlin.scrollingtable.type4.model.Data;
+
+import java.util.List;
 
 /**
  * Created by xiaoyulaoshi on 2018/1/31.
@@ -70,7 +68,7 @@ public class Type4Activity extends Activity implements OnScrollListener {
         currentPage = currentPage + 1;
 
 		/*
-		 * List<Data> datas = new ArrayList<Data>();
+         * List<Data> datas = new ArrayList<Data>();
 		 *
 		 * for (int i = 0; i < 10; i++) { Data data = new Data(); data.setStr1(i
 		 * + "行"); data.setStr2(i + ""); data.setStr3(i + ""); data.setStr4(i +
@@ -98,10 +96,8 @@ public class Type4Activity extends Activity implements OnScrollListener {
 
         public boolean onTouch(View arg0, MotionEvent arg1) {
             // 当在列头 和 listView控件上touch时，将这个touch的事件分发给 ScrollView
-            HorizontalScrollView headSrcrollView = (HorizontalScrollView) mHead
-                    .findViewById(R.id.horizontalScrollView1);
-            HorizontalScrollView headSrcrollView2 = (HorizontalScrollView) mHead
-                    .findViewById(R.id.horizontalScrollView1);
+            HorizontalScrollView headSrcrollView = mHead.findViewById(R.id.horizontalScrollView1);
+            HorizontalScrollView headSrcrollView2 = mHead.findViewById(R.id.horizontalScrollView1);
             headSrcrollView.onTouchEvent(arg1);
             headSrcrollView2.onTouchEvent(arg1);
             return false;
@@ -167,11 +163,12 @@ public class Type4Activity extends Activity implements OnScrollListener {
                 }
             }
 
-        };
+        }
+
+        ;
     };
 
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -184,7 +181,6 @@ public class Type4Activity extends Activity implements OnScrollListener {
      * @param arg3
      */
     public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        // TODO Auto-generated method stub
         Log.i("Type4Activity ListView", "onItemClick Event");
         Toast.makeText(Type4Activity.this, "点了第" + arg2 + "个",
                 Toast.LENGTH_SHORT).show();

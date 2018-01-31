@@ -5,7 +5,6 @@ package com.example.kotlin.scrollingtable.type4;
  */
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.kotlin.scrollingtable.R;
 import com.example.kotlin.scrollingtable.type4.model.Data;
+import com.example.kotlin.scrollingtable.type4.view.MyHScrollView;
 
 import java.util.List;
 
@@ -37,8 +37,6 @@ public class HolderAdapter extends BaseAdapter {
     private int id_row_layout;
     private LayoutInflater mInflater;
 
-    int[] colors = {Color.rgb(102, 102, 51), Color.rgb(153, 153, 51)};
-    // int[] colors = { Color.BLACK, Color.BLACK };
 
     public HolderAdapter(Context context, int id_row_layout,
                          List<Data> currentData, RelativeLayout mHead) {
@@ -87,28 +85,20 @@ public class HolderAdapter extends BaseAdapter {
             convertView = mInflater.inflate(id_row_layout, null);
             holder = new ViewHolder();
 
-            MyHScrollView scrollView1 = (MyHScrollView) convertView
-                    .findViewById(R.id.horizontalScrollView1);
+            MyHScrollView scrollView1 = convertView.findViewById(R.id.horizontalScrollView1);
 
             holder.scrollView = scrollView1;
-            holder.txt1 = (TextView) convertView.findViewById(R.id.textView1);
-            holder.txt2 = (TextView) convertView.findViewById(R.id.textView2);
-            holder.txt3 = (TextView) convertView.findViewById(R.id.textView3);
-            holder.txt4 = (TextView) convertView.findViewById(R.id.textView4);
-            holder.txt5 = (TextView) convertView.findViewById(R.id.textView5);
+            holder.txt1 = convertView.findViewById(R.id.textView1);
+            holder.txt2 = convertView.findViewById(R.id.textView2);
+            holder.txt3 = convertView.findViewById(R.id.textView3);
+            holder.txt4 = convertView.findViewById(R.id.textView4);
+            holder.txt5 = convertView.findViewById(R.id.textView5);
 
-            MyHScrollView headSrcrollView = (MyHScrollView) mHead
-                    .findViewById(R.id.horizontalScrollView1);
-            headSrcrollView
-                    .AddOnScrollChangedListener(new OnScrollChangedListenerImp(scrollView1));
+            MyHScrollView headScrollView = mHead.findViewById(R.id.horizontalScrollView1);
+            headScrollView.AddOnScrollChangedListener(new OnScrollChangedListenerImp(scrollView1));
 
             convertView.setTag(holder);
-            // 隔行变色
-//            convertView.setBackgroundColor(colors[position % 2]);
-            // mHolderList.add(holder);
         } else {
-            // 隔行变色
-//            convertView.setBackgroundColor(colors[position % 2]);
             holder = (ViewHolder) convertView.getTag();
         }
         holder.txt1.setText(currentData.get(position).getStr1() + 1 + "列");

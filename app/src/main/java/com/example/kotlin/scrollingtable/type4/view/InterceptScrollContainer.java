@@ -1,4 +1,4 @@
-package com.example.kotlin.scrollingtable.type4;
+package com.example.kotlin.scrollingtable.type4.view;
 
 /**
  * Created by xiaoyulaoshi on 2018/1/31.
@@ -29,6 +29,5 @@ public class InterceptScrollContainer extends LinearLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.i(TAG, "onInterceptTouchEvent" + ev);
         return true;
-        //return super.onInterceptTouchEvent(ev);
     }
 }

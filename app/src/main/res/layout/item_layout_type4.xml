@@ -18,7 +18,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#FFFFFF" />
 
-    <com.example.kotlin.scrollingtable.type4.InterceptScrollContainer
+    <com.example.kotlin.scrollingtable.type4.view.InterceptScrollContainer
         android:id="@+id/scroollContainter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         android:layout_toRightOf="@id/textView1"
         android:focusable="false">
 
-        <com.example.kotlin.scrollingtable.type4.MyHScrollView
+        <com.example.kotlin.scrollingtable.type4.view.MyHScrollView
             android:id="@+id/horizontalScrollView1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
-        </com.example.kotlin.scrollingtable.type4.MyHScrollView>
-    </com.example.kotlin.scrollingtable.type4.InterceptScrollContainer>
+        </com.example.kotlin.scrollingtable.type4.view.MyHScrollView>
+    </com.example.kotlin.scrollingtable.type4.view.InterceptScrollContainer>
 
 </RelativeLayout>

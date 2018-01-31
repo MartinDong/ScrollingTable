@@ -1,4 +1,4 @@
-package com.example.kotlin.scrollingtable.type4;
+package com.example.kotlin.scrollingtable.type4.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

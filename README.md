@@ -1,9 +1,13 @@
 # ScrollingTable
 
 > 说明：本项目使用了多种实现方式，根据不同的业务需求去选定；
+
 > Type1（使用两个列表）:(左侧)RecycleView + （右侧）【HorizontalScrollView + RecycleView(使用GridLayoutManager)】 
+
 > Type2（使用一个列表）:RecycleView + Item布局{（左边）TextView+（右边）RecycleView} 【沒有完成列表中联动】
+
 > Type5（使用两个列表）:(左侧)RecycleView + （右侧）【HorizontalScrollView + RecycleView(使用LinearLayoutManager)】 
+
 > Type4（本项目的最佳实现【推荐】）:ListView + Item布局{（左边）TextView+（右边）HorizontalScrollView} 
 
 ## [下载APK](http://fir.im/4e96)

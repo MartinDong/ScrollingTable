@@ -15,12 +15,16 @@
 
 ### 视图分析
 1、**主视图分为： 头部控件（HeadView）+下面的ListView**
+
 2、**头部控件（HeadView）：左边为 TextView，右边为 HorizontalScrollView**
+
 3、**ListView 条目视图：左边为 TextView，右边为 HorizontalScrollView**
 
 #### 视图联动分析
 1、**头部 HorizontalScrollView 滑动事件广播通知 ListView 条目中的 HorizontalScrollView 从而实现联动效果**
+
 2、**拦截 ListView 单个条目中的 HorizontalScrollView 滑动事件，防止 ListView 的触摸事件和 HorizontalScrollView 触摸事件冲突**
+
 3、**统一处理 ListView 和 头部控件（HeadView）触摸事件，统一将触摸事件传递给 头部控件（HeadView）右边的 HorizontalScrollView ，从而实现（1）中的效果**
 
 ````java

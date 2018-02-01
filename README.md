@@ -1,9 +1,15 @@
 # ScrollingTable
-> 要求：可以上下左右移动的表格布局，仿同花顺自选列表，老虎证券财报列表
+
+> 说明：本项目使用了多种实现方式，根据不同的业务需求去选定；
+> Type1（使用两个列表）:(左侧)RecycleView + （右侧）【HorizontalScrollView + RecycleView(使用GridLayoutManager)】 
+> Type2（使用一个列表）:RecycleView + Item布局{（左边）TextView+（右边）RecycleView} 【沒有完成列表中联动】
+> Type5（使用两个列表）:(左侧)RecycleView + （右侧）【HorizontalScrollView + RecycleView(使用LinearLayoutManager)】 
+> Type4（本项目的最佳实现【推荐】）:ListView + Item布局{（左边）TextView+（右边）HorizontalScrollView} 
 
 ## [下载APK](http://fir.im/4e96)
 ![](/doc/下载链接二维码.png)
 
+> 要求：可以上下左右移动的表格布局，仿同花顺自选列表，老虎证券财报列表
 
 | 同花顺效果  | 老虎证券效果|  最终实现效果如图|  
 | --------   | -----|  -----| 
@@ -13,14 +19,14 @@
 ## 实现思路分析
 <img src="/doc/深度截图_选择区域_20180201223904.png" width="480px"/>
 
-### 视图分析
+## 视图分析
 1、**主视图分为： 头部控件（HeadView）+下面的ListView**
 
 2、**头部控件（HeadView）：左边为 TextView，右边为 HorizontalScrollView**
 
 3、**ListView 条目视图：左边为 TextView，右边为 HorizontalScrollView**
 
-#### 视图联动分析
+## 视图联动分析
 1、**头部 HorizontalScrollView 滑动事件广播通知 ListView 条目中的 HorizontalScrollView 从而实现联动效果**
 
 2、**拦截 ListView 单个条目中的 HorizontalScrollView 滑动事件，防止 ListView 的触摸事件和 HorizontalScrollView 触摸事件冲突**

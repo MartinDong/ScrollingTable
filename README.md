@@ -13,11 +13,11 @@
 ## 实现思路分析
 <img src="/doc/深度截图_选择区域_20180201223904.png" width="480px"/>
 
-根据图分析视图主要分为两个部分，头部控件（HeadView）+下面的ListView，为了让ListView右侧可以实现滑动的效果，
+    根据图分析视图主要分为两个部分，头部控件（HeadView）+下面的ListView，为了让ListView右侧可以实现滑动的效果，
 条目布局右侧使用 HorizontalScrollView 来完成（头部实现的思路一样），
 主要难点为，如何让列表中的每个条目中的 HorizontalScrollView 联滑动，以及头部控件（HeadView）的右侧联动；
 
-解决思路：使用 头部控件（HeadView）右侧的 HorizontalScrollView 通知 ListView 条目中的 右侧 HorizontalScrollView ；
+    解决思路：使用 头部控件（HeadView）右侧的 HorizontalScrollView 通知 ListView 条目中的 右侧 HorizontalScrollView ；
 重写 HorizontalScrollView 设置观察者 ScrollViewObserver ，自定义滑动事件监听器 OnScrollChangedListener ,
 初始化ListView列表中条目右侧的 HorizontalScrollView 时候将条目的自定义滑动监听引用传入到 头部控件（HeadView）右侧的
  HorizontalScrollView 滑动监听集合中，并重写 HorizontalScrollView 的 onScrollChanged方法，将滑动事件通知到观察者的每一个自定义滑动事件；

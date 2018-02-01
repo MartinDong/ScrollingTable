@@ -13,19 +13,19 @@
 ## 实现思路分析
 <img src="/doc/深度截图_选择区域_20180201223904.png" width="480px"/>
 
-    根据图分析视图主要分为两个部分，头部控件（HeadView）+下面的ListView，为了让ListView右侧可以实现滑动的效果，
-条目布局右侧使用 HorizontalScrollView 来完成（头部实现的思路一样），
-主要难点为，如何让列表中的每个条目中的 HorizontalScrollView 联滑动，以及头部控件（HeadView）的右侧联动；
+### 视图分析
+1、**主视图分为： 头部控件（HeadView）+下面的ListView**
+2、**头部控件（HeadView）：左边为 TextView，右边为 HorizontalScrollView**
+3、**ListView 条目视图：左边为 TextView，右边为 HorizontalScrollView**
 
-    解决思路：使用 头部控件（HeadView）右侧的 HorizontalScrollView 通知 ListView 条目中的 右侧 HorizontalScrollView ；
-重写 HorizontalScrollView 设置观察者 ScrollViewObserver ，自定义滑动事件监听器 OnScrollChangedListener ,
-初始化ListView列表中条目右侧的 HorizontalScrollView 时候将条目的自定义滑动监听引用传入到 头部控件（HeadView）右侧的
- HorizontalScrollView 滑动监听集合中，并重写 HorizontalScrollView 的 onScrollChanged方法，将滑动事件通知到观察者的每一个自定义滑动事件；
- 
- ````java
+#### 视图联动分析
+1、**头部 HorizontalScrollView 滑动事件广播通知 ListView 条目中的 HorizontalScrollView 从而实现联动效果**
+2、**拦截 ListView 单个条目中的 HorizontalScrollView 滑动事件，防止 ListView 的触摸事件和 HorizontalScrollView 触摸事件冲突**
+3、**统一处理 ListView 和 头部控件（HeadView）触摸事件，统一将触摸事件传递给 头部控件（HeadView）右边的 HorizontalScrollView ，从而实现（1）中的效果**
+
+````java
  /**
   * Created by xiaoyulaoshi on 2018/1/31.
-  *
   *
   * 自定义的 滚动控件
   * 重载了 [SyncHScrollView.onScrollChanged]（滚动条变化）,监听每次的变化通知给观察(此变化的)观察者
@@ -106,8 +106,9 @@
 
 ````java
 /**
- * 列表数据适配器
- * Created by xiaoyulaoshi on 2018/1/31.
+* ListView使用的数据适配器，实现数据填充以及列表右侧的 HorizontalScrollView 与 页面中的 头部控件（HeadView） 右侧 HorizontalScrollView 的绑定
+* 
+* Created by xiaoyulaoshi on 2018/1/31.
  */
 class Type4Adapter(context: Context,
                    /**
@@ -223,6 +224,75 @@ class Type4Adapter(context: Context,
 
     companion object {
         private val TAG = Type4Adapter::class.java.name
+    }
+}
+````
+
+
+````java
+
+/**
+ * 最完美实现，使用 ListView + HorizontalScrollView 实现
+ * Created by xiaoyulaoshi on 2018/1/31.
+ */
+class Type4Activity : Activity() {
+    internal lateinit var mListView1: ListView
+    internal lateinit var mHead: RelativeLayout
+    internal lateinit var type4Adapter: Type4Adapter
+
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_type4)
+
+        mHead = findViewById(R.id.head)
+        mHead.isFocusable = true
+        mHead.isClickable = true
+
+        //TODO 划重点：这里需要从传入的列表头拿到里面的右侧滑动控件
+        mHead.setOnTouchListener(ListViewAndHeadViewTouchListener())
+
+
+        mListView1 = findViewById(R.id.lv_produce)
+        mListView1.setOnTouchListener(ListViewAndHeadViewTouchListener())
+
+        // 创建当前用于显示视图的数据
+        val currentData = ArrayList<Data>()
+        for (i in 0..49) {
+            val data = Data()
+            data.str1 = "股票>" + i
+            data.str2 = "价格>1"
+            data.str3 = "价格>2"
+            data.str4 = "价格>3"
+            data.str5 = "价格>4"
+            data.str6 = "价格>5"
+            data.str7 = "价格>6"
+            data.str8 = "价格>7"
+            currentData.add(data)
+        }
+
+
+        type4Adapter = Type4Adapter(this, R.layout.item_layout_type4, currentData, mHead)
+        mListView1.adapter = type4Adapter
+        // OnClick监听
+        mListView1.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 ->
+            Log.i("Type4Activity ListView", "onItemClick Event")
+            Toast.makeText(this@Type4Activity, "点了第" + arg2 + "个",
+                    Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    /**
+     * TODO 划重点：用来将头部和列表上面的触摸事件都分发给头部的滑动控件
+     */
+    internal inner class ListViewAndHeadViewTouchListener : View.OnTouchListener {
+
+        override fun onTouch(arg0: View, arg1: MotionEvent): Boolean {
+            // 当在列头 和 listView控件上touch时，将这个touch的事件分发给 ScrollView
+            val headScrollView = mHead.findViewById<HorizontalScrollView>(R.id.horizontalScrollView1)
+            headScrollView.onTouchEvent(arg1)
+            return false
+        }
     }
 
 }

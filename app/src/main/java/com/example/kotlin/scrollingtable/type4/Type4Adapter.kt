@@ -104,12 +104,12 @@ class Type4Adapter(context: Context,
             holder = convertView.tag as ViewHolder
         }
         holder.txt1!!.text = currentData[position].str1
-        holder.txt2!!.text = currentData[position].str1!! + currentData[position].str2!!
-        holder.txt3!!.text = currentData[position].str1!! + currentData[position].str3!!
-        holder.txt4!!.text = currentData[position].str1!! + currentData[position].str4!!
-        holder.txt5!!.text = currentData[position].str1!! + currentData[position].str5!!
-        holder.txt6!!.text = currentData[position].str1!! + currentData[position].str6!!
-        holder.txt7!!.text = currentData[position].str1!! + currentData[position].str7!!
+        holder.txt2!!.text =  currentData[position].str2!!
+        holder.txt3!!.text =  currentData[position].str3!!
+        holder.txt4!!.text =  currentData[position].str4!!
+        holder.txt5!!.text =  currentData[position].str5!!
+        holder.txt6!!.text =  currentData[position].str6!!
+        holder.txt7!!.text =  currentData[position].str7!!
         return convertView
     }
 

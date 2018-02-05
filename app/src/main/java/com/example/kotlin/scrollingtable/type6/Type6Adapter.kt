@@ -4,12 +4,10 @@ package com.example.kotlin.scrollingtable.type6
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.HorizontalScrollView
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type4.model.ProductData
 import com.example.kotlin.scrollingtable.type4.view.SyncHScrollView
@@ -23,11 +21,17 @@ class Type6Adapter(context: Context,
                     * List中的数据
                     */
                    private val currentData: MutableList<ProductData>,
-                   /**
-                    * ListView头部中的横向滑动视图
-                    */
-                   private val headScrollView: SyncHScrollView) : BaseAdapter() {
+                   mListView: ListView,
+                   private var mHeadStickyHSView: SyncHScrollView?) : BaseAdapter() {
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
+
+    //列表中的分组头部右侧的滑动视图
+    private var mHeadGroupScrollView: SyncHScrollView? = null
+
+    init {
+        mListView.setOnTouchListener(ListViewAndHeadViewTouchListener())
+        mHeadStickyHSView?.setOnTouchListener(ListViewAndHeadViewTouchListener())
+    }
 
     override fun getCount(): Int {
         return this.currentData.size
@@ -47,7 +51,7 @@ class Type6Adapter(context: Context,
     }
 
     override fun getViewTypeCount(): Int {
-        return 2
+        return 3
     }
 
 
@@ -56,6 +60,7 @@ class Type6Adapter(context: Context,
         var convertView = convertView
         var holder1: ViewHolder1? = null
         var holder2: ViewHolder2? = null
+        var holder3: ViewHolder3? = null
 
         //获取当前的条目数据类型
         val typeItem = getItemViewType(position)
@@ -70,7 +75,8 @@ class Type6Adapter(context: Context,
                     val scrollView1 = convertView!!.findViewById<SyncHScrollView>(R.id.horizontalScrollView1)
                     //TODO 划重点：这里需要从传入的列表头拿到里面的右侧滑动控件
                     //将当前条目的右侧滑动控件添加到头部滑动控件的滑动观察者集合中
-                    headScrollView.AddOnScrollChangedListener(OnScrollChangedListenerImp(scrollView1))
+                    mHeadGroupScrollView?.AddOnScrollChangedListener(OnScrollChangedListenerImp(scrollView1))
+                    mHeadStickyHSView?.AddOnScrollChangedListener(OnScrollChangedListenerImp(scrollView1))
 
                     //进行holder的初始化操作
                     holder1.scrollView = scrollView1
@@ -91,6 +97,15 @@ class Type6Adapter(context: Context,
 
                     convertView.tag = holder2
                 }
+
+                2 -> {
+                    convertView = mInflater.inflate(R.layout.item_layout_type6_group, null)
+                    holder3 = ViewHolder3()
+
+                    mHeadGroupScrollView = convertView.findViewById(R.id.horizontalScrollView1)
+                    holder3.scrollView = convertView.findViewById(R.id.horizontalScrollView1)
+                    convertView.tag = holder3
+                }
             }
 
         } else {
@@ -100,6 +115,9 @@ class Type6Adapter(context: Context,
                 }
                 1 -> {
                     holder2 = convertView.tag as ViewHolder2
+                }
+                2 -> {
+                    holder3 = convertView.tag as ViewHolder3
                 }
             }
         }
@@ -125,6 +143,19 @@ class Type6Adapter(context: Context,
         }
     }
 
+    /**
+     * TODO 划重点：用来将头部和列表上面的触摸事件都分发给头部的滑动控件
+     */
+    internal inner class ListViewAndHeadViewTouchListener : View.OnTouchListener {
+
+        override fun onTouch(arg0: View, arg1: MotionEvent): Boolean {
+            // 当在列头 和 listView控件上touch时，将这个touch的事件分发给 ScrollView
+            mHeadGroupScrollView?.onTouchEvent(arg1)
+            mHeadStickyHSView?.onTouchEvent(arg1)
+            return false
+        }
+    }
+
     internal inner class ViewHolder1 {
         var txt1: TextView? = null
         var txt2: TextView? = null
@@ -139,5 +170,11 @@ class Type6Adapter(context: Context,
     internal inner class ViewHolder2 {
         var txt1: TextView? = null
         var iv_icon: ImageView? = null
+    }
+
+    internal inner class ViewHolder3 {
+        //右侧的滑动控件
+        var scrollView: SyncHScrollView? = null
+
     }
 }

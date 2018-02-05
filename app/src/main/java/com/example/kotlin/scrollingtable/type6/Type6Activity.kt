@@ -4,7 +4,6 @@ package com.example.kotlin.scrollingtable.type6
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.widget.AbsListView
 import android.widget.AdapterView.OnItemClickListener
@@ -25,10 +24,6 @@ class Type6Activity : Activity() {
     internal lateinit var mHeadStickyView: View
     //头部吸顶的右侧滑动视图
     internal lateinit var mHeadStickyHSView: SyncHScrollView
-    //列表的头部视图
-    internal lateinit var mHeadHeaderView: View
-    //列表的头部视图的右侧滑动视图
-    internal lateinit var mHeadHeaderHSView: SyncHScrollView
     //列表视图
     internal lateinit var mListView: ListView
     //数据适配器
@@ -38,22 +33,13 @@ class Type6Activity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_type6)
 
-        //列表的头部视图
-        mHeadHeaderView = View.inflate(this, R.layout.item_layout_type4, null)
-        mHeadHeaderHSView = mHeadHeaderView.findViewById(R.id.horizontalScrollView1)
-        mHeadHeaderView.isClickable = true
-
         //头部吸顶视图
         mHeadStickyView = findViewById(R.id.head)
         mHeadStickyHSView = findViewById(R.id.horizontalScrollView1)
-        mHeadStickyHSView.AddOnScrollChangedListener(Type6Adapter.OnScrollChangedListenerImp(mHeadHeaderHSView))
 
         //TODO 划重点：这里需要从传入的列表头拿到里面的右侧滑动控件
-        mHeadHeaderView.setOnTouchListener(ListViewAndHeadViewTouchListener())
 
         mListView = findViewById(R.id.lv_produce)
-        mListView.addHeaderView(mHeadHeaderView)
-        mListView.setOnTouchListener(ListViewAndHeadViewTouchListener())
 
         // 创建当前用于显示视图的数据
         val currentData = ArrayList<ProductData>()
@@ -72,9 +58,18 @@ class Type6Activity : Activity() {
 
         val data = ProductData()
         data.typeItem = 1
-        currentData.add(4, data)
+        currentData.add(0, data)
+        currentData.add(1, data)
 
-        type4Adapter = Type6Adapter(this, currentData, mHeadHeaderHSView)
+        val dataHead = ProductData()
+        dataHead.typeItem = 2
+        currentData.add(2, dataHead)
+
+        currentData.add(10, data)
+        currentData.add(11, data)
+
+
+        type4Adapter = Type6Adapter(this, currentData, mListView, mHeadStickyHSView)
         mListView.adapter = type4Adapter
         // OnClick监听
         mListView.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 ->
@@ -86,7 +81,7 @@ class Type6Activity : Activity() {
 
         mListView.setOnScrollListener(object : AbsListView.OnScrollListener {
             override fun onScroll(view: AbsListView?, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
-                if (firstVisibleItem >= 1) {
+                if (currentData[firstVisibleItem].typeItem == 0) {
                     mHeadStickyView.visibility = View.VISIBLE
                 } else {
                     mHeadStickyView.visibility = View.GONE
@@ -99,17 +94,5 @@ class Type6Activity : Activity() {
         })
     }
 
-    /**
-     * TODO 划重点：用来将头部和列表上面的触摸事件都分发给头部的滑动控件
-     */
-    internal inner class ListViewAndHeadViewTouchListener : View.OnTouchListener {
-
-        override fun onTouch(arg0: View, arg1: MotionEvent): Boolean {
-            // 当在列头 和 listView控件上touch时，将这个touch的事件分发给 ScrollView
-            mHeadHeaderHSView.onTouchEvent(arg1)
-            mHeadStickyHSView.onTouchEvent(arg1)
-            return false
-        }
-    }
 
 }

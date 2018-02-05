@@ -8,11 +8,11 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.AbsListView
 import android.widget.AdapterView.OnItemClickListener
-import android.widget.HorizontalScrollView
 import android.widget.ListView
 import android.widget.Toast
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type4.model.Data
+import com.example.kotlin.scrollingtable.type4.view.SyncHScrollView
 import java.util.*
 
 
@@ -21,28 +21,40 @@ import java.util.*
  * Created by xiaoyulaoshi on 2018/1/31.
  */
 class Type4Activity : Activity() {
-    internal lateinit var mListView1: ListView
-    internal lateinit var mHeadHeader: View
-    internal lateinit var mHeadSticky: View
+
+    //头部吸顶视图
+    internal lateinit var mHeadStickyView: View
+    //头部吸顶的右侧滑动视图
+    internal lateinit var mHeadStickyHSView: SyncHScrollView
+    //列表的头部视图
+    internal lateinit var mHeadHeaderView: View
+    //列表的头部视图的右侧滑动视图
+    internal lateinit var mHeadHeaderHSView: SyncHScrollView
+    //列表视图
+    internal lateinit var mListView: ListView
+    //数据适配器
     internal lateinit var type4Adapter: Type4Adapter
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_type4)
 
-        mHeadSticky = findViewById(R.id.head)
+        //列表的头部视图
+        mHeadHeaderView = View.inflate(this, R.layout.item_layout_type4, null)
+        mHeadHeaderHSView = mHeadHeaderView.findViewById(R.id.horizontalScrollView1)
+        mHeadHeaderView.isClickable = true
 
-        mHeadHeader = View.inflate(this, R.layout.item_layout_type4, null)
-        mHeadHeader.isFocusable = true
-        mHeadHeader.isClickable = true
+        //头部吸顶视图
+        mHeadStickyView = findViewById(R.id.head)
+        mHeadStickyHSView = findViewById(R.id.horizontalScrollView1)
+        mHeadStickyHSView.AddOnScrollChangedListener(Type4Adapter.OnScrollChangedListenerImp(mHeadHeaderHSView))
 
         //TODO 划重点：这里需要从传入的列表头拿到里面的右侧滑动控件
-        mHeadHeader.setOnTouchListener(ListViewAndHeadViewTouchListener())
+        mHeadHeaderView.setOnTouchListener(ListViewAndHeadViewTouchListener())
 
-        mListView1 = findViewById(R.id.lv_produce)
-
-        mListView1.addHeaderView(mHeadHeader)
-        mListView1.setOnTouchListener(ListViewAndHeadViewTouchListener())
+        mListView = findViewById(R.id.lv_produce)
+        mListView.addHeaderView(mHeadHeaderView)
+        mListView.setOnTouchListener(ListViewAndHeadViewTouchListener())
 
         // 创建当前用于显示视图的数据
         val currentData = ArrayList<Data>()
@@ -60,22 +72,22 @@ class Type4Activity : Activity() {
         }
 
 
-        type4Adapter = Type4Adapter(this, R.layout.item_layout_type4, currentData, mHeadHeader)
-        mListView1.adapter = type4Adapter
+        type4Adapter = Type4Adapter(this, R.layout.item_layout_type4, currentData, mHeadHeaderHSView)
+        mListView.adapter = type4Adapter
         // OnClick监听
-        mListView1.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 ->
+        mListView.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 ->
             Log.i("Type4Activity ListView", "onItemClick Event")
             Toast.makeText(this@Type4Activity, "点了第" + arg2 + "个",
                     Toast.LENGTH_SHORT).show()
         }
 
 
-        mListView1.setOnScrollListener(object : AbsListView.OnScrollListener {
+        mListView.setOnScrollListener(object : AbsListView.OnScrollListener {
             override fun onScroll(view: AbsListView?, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
                 if (firstVisibleItem >= 1) {
-                    mHeadSticky.visibility = View.VISIBLE
+                    mHeadStickyView.visibility = View.VISIBLE
                 } else {
-                    mHeadSticky.visibility = View.GONE
+                    mHeadStickyView.visibility = View.GONE
                 }
             }
 
@@ -92,10 +104,8 @@ class Type4Activity : Activity() {
 
         override fun onTouch(arg0: View, arg1: MotionEvent): Boolean {
             // 当在列头 和 listView控件上touch时，将这个touch的事件分发给 ScrollView
-            val headScrollView = mHeadHeader.findViewById<HorizontalScrollView>(R.id.horizontalScrollView1)
-            headScrollView.onTouchEvent(arg1)
-            val headStickyScrollView = mHeadSticky.findViewById<HorizontalScrollView>(R.id.horizontalScrollView1)
-            headStickyScrollView.onTouchEvent(arg1)
+            mHeadHeaderHSView.onTouchEvent(arg1)
+            mHeadStickyHSView.onTouchEvent(arg1)
             return false
         }
     }

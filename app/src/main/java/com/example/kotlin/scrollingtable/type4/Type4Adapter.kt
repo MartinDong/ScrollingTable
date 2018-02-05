@@ -28,9 +28,9 @@ class Type4Adapter(context: Context,
                     */
                    private val currentData: MutableList<Data>,
                    /**
-                    * ListView头部
+                    * ListView头部中的横向滑动视图
                     */
-                   private val mHead: View) : BaseAdapter() {
+                   private val headScrollView: SyncHScrollView) : BaseAdapter() {
     private val mInflater: LayoutInflater
 
 
@@ -82,10 +82,8 @@ class Type4Adapter(context: Context,
             val scrollView1 = convertView!!.findViewById<SyncHScrollView>(R.id.horizontalScrollView1)
 
             //TODO 划重点：这里需要从传入的列表头拿到里面的右侧滑动控件
-            val headScrollView = mHead.findViewById<SyncHScrollView>(R.id.horizontalScrollView1)
             //将当前条目的右侧滑动控件添加到头部滑动控件的滑动观察者集合中
             headScrollView.AddOnScrollChangedListener(OnScrollChangedListenerImp(scrollView1))
-
 
             //进行holder的初始化操作
             holder.scrollView = scrollView1
@@ -111,7 +109,7 @@ class Type4Adapter(context: Context,
         return convertView
     }
 
-    internal inner class OnScrollChangedListenerImp(var mScrollViewArg: SyncHScrollView) :
+    open class OnScrollChangedListenerImp(var mScrollViewArg: SyncHScrollView) :
             SyncHScrollView.OnScrollChangedListener {
 
         override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {

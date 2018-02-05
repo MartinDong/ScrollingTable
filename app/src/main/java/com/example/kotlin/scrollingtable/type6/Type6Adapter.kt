@@ -1,9 +1,8 @@
-package com.example.kotlin.scrollingtable.type4
+package com.example.kotlin.scrollingtable.type6
 
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ import com.example.kotlin.scrollingtable.type4.view.SyncHScrollView
  * 列表数据适配器
  * Created by xiaoyulaoshi on 2018/1/31.
  */
-class Type4Adapter(context: Context,
+class Type6Adapter(context: Context,
                    /**
                     * layout ID
                     */
@@ -31,21 +30,14 @@ class Type4Adapter(context: Context,
                     * ListView头部中的横向滑动视图
                     */
                    private val headScrollView: SyncHScrollView) : BaseAdapter() {
-    private val mInflater: LayoutInflater
-
-
-    init {
-        Log.v(TAG + ".Type4Adapter", " 初始化")
-        this.mInflater = LayoutInflater.from(context)
-
-    }
+    private val mInflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun getCount(): Int {
         return this.currentData.size
     }
 
     override fun getItem(position: Int): Any? {
-        return null
+        return currentData[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -128,8 +120,5 @@ class Type4Adapter(context: Context,
         var scrollView: HorizontalScrollView? = null
     }
 
-    companion object {
-        private val TAG = Type4Adapter::class.java.name
-    }
 
 }

@@ -9,6 +9,7 @@ import com.example.kotlin.scrollingtable.type2.Type2Activity
 import com.example.kotlin.scrollingtable.type3.Type3Activity
 import com.example.kotlin.scrollingtable.type4.Type4Activity
 import com.example.kotlin.scrollingtable.type5.Type5Activity
+import com.example.kotlin.scrollingtable.type6.Type6Activity
 
 /**
  * 主入口
@@ -45,6 +46,11 @@ class MainActivity : AppCompatActivity() {
 
     fun jumpType5(view: View) {
         val intent = Intent(this, Type5Activity::class.java)
+        startActivity(intent)
+    }
+
+    fun jumpType6(view: View) {
+        val intent = Intent(this, Type6Activity::class.java)
         startActivity(intent)
     }
 }

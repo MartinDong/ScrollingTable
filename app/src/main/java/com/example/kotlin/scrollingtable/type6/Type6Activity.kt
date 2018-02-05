@@ -1,4 +1,4 @@
-package com.example.kotlin.scrollingtable.type4
+package com.example.kotlin.scrollingtable.type6
 
 
 import android.app.Activity
@@ -15,12 +15,11 @@ import com.example.kotlin.scrollingtable.type4.model.ProductData
 import com.example.kotlin.scrollingtable.type4.view.SyncHScrollView
 import java.util.*
 
-
 /**
  * 最完美实现，使用 ListView + HorizontalScrollView 实现
  * Created by xiaoyulaoshi on 2018/1/31.
  */
-class Type4Activity : Activity() {
+class Type6Activity : Activity() {
 
     //头部吸顶视图
     internal lateinit var mHeadStickyView: View
@@ -33,11 +32,11 @@ class Type4Activity : Activity() {
     //列表视图
     internal lateinit var mListView: ListView
     //数据适配器
-    internal lateinit var type4Adapter: Type4Adapter
+    internal lateinit var type4Adapter: Type6Adapter
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_type4)
+        setContentView(R.layout.activity_type6)
 
         //列表的头部视图
         mHeadHeaderView = View.inflate(this, R.layout.item_layout_type4, null)
@@ -47,7 +46,7 @@ class Type4Activity : Activity() {
         //头部吸顶视图
         mHeadStickyView = findViewById(R.id.head)
         mHeadStickyHSView = findViewById(R.id.horizontalScrollView1)
-        mHeadStickyHSView.AddOnScrollChangedListener(Type4Adapter.OnScrollChangedListenerImp(mHeadHeaderHSView))
+        mHeadStickyHSView.AddOnScrollChangedListener(Type6Adapter.OnScrollChangedListenerImp(mHeadHeaderHSView))
 
         //TODO 划重点：这里需要从传入的列表头拿到里面的右侧滑动控件
         mHeadHeaderView.setOnTouchListener(ListViewAndHeadViewTouchListener())
@@ -72,12 +71,12 @@ class Type4Activity : Activity() {
         }
 
 
-        type4Adapter = Type4Adapter(this, R.layout.item_layout_type4, currentData, mHeadHeaderHSView)
+        type4Adapter = Type6Adapter(this, R.layout.item_layout_type4, currentData, mHeadHeaderHSView)
         mListView.adapter = type4Adapter
         // OnClick监听
         mListView.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 ->
             Log.i("Type4Activity ListView", "onItemClick Event")
-            Toast.makeText(this@Type4Activity, "点了第" + arg2 + "个",
+            Toast.makeText(this@Type6Activity, "点了第" + arg2 + "个",
                     Toast.LENGTH_SHORT).show()
         }
 

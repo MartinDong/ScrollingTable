@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/head"
+        layout="@layout/item_layout_type4"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/lv_produce"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="#2F4F4F"
+        android:dividerHeight="1dp"
+        android:fadingEdge="none"
+        android:scrollingCache="false"
+        tools:listitem="@layout/item_layout_type4" />
+
+</LinearLayout>

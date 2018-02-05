@@ -28,11 +28,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="jumpType4"
-        android:text="最佳实现方案" />
+        android:text="Type4最佳实现方案" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="jumpType5"
         android:text="Type5" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="jumpType6"
+        android:text="Type6最佳实现方案" />
 </LinearLayout>

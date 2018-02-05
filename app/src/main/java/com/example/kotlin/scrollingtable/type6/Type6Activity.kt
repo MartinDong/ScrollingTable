@@ -70,8 +70,11 @@ class Type6Activity : Activity() {
             currentData.add(data)
         }
 
+        val data = ProductData()
+        data.typeItem = 1
+        currentData.add(4, data)
 
-        type4Adapter = Type6Adapter(this, R.layout.item_layout_type4, currentData, mHeadHeaderHSView)
+        type4Adapter = Type6Adapter(this, currentData, mHeadHeaderHSView)
         mListView.adapter = type4Adapter
         // OnClick监听
         mListView.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 ->

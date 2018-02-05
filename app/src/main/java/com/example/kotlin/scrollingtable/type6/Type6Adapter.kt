@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.HorizontalScrollView
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type4.model.ProductData
@@ -18,10 +19,6 @@ import com.example.kotlin.scrollingtable.type4.view.SyncHScrollView
  * Created by xiaoyulaoshi on 2018/1/31.
  */
 class Type6Adapter(context: Context,
-                   /**
-                    * layout ID
-                    */
-                   private val id_row_layout: Int,
                    /**
                     * List中的数据
                     */
@@ -44,60 +41,79 @@ class Type6Adapter(context: Context,
         return 0
     }
 
-    /**
-     * 向List中添加数据
-     *
-     * @param items
-     */
-    fun addItem(items: List<ProductData>) {
-        for (item in items) {
-            currentData.add(item)
-        }
+    // 每个convert view都会调用此方法，获得当前所需要的view样式
+    override fun getItemViewType(position: Int): Int {
+        return currentData[position].typeItem
     }
 
-    /**
-     * 清空当List中的数据
-     */
-    fun cleanAll() {
-        this.currentData.clear()
+    override fun getViewTypeCount(): Int {
+        return 2
     }
+
 
     @SuppressLint("SetTextI18n")
-    override fun getView(position: Int, convertView: View?, parentView: ViewGroup): View {
+    override fun getView(position: Int, convertView: View?, parentView: ViewGroup): View? {
         var convertView = convertView
-        var holder: ViewHolder? = null
+        var holder1: ViewHolder1? = null
+        var holder2: ViewHolder2? = null
+
+        //获取当前的条目数据类型
+        val typeItem = getItemViewType(position)
+
         if (convertView == null) {
-            convertView = mInflater.inflate(id_row_layout, null)
-            holder = ViewHolder()
+            when (typeItem) {
+                0 -> {
+                    convertView = mInflater.inflate(R.layout.item_layout_type4, null)
+                    holder1 = ViewHolder1()
 
-            //获取当前条目中的右侧滑动控件
-            val scrollView1 = convertView!!.findViewById<SyncHScrollView>(R.id.horizontalScrollView1)
+                    //获取当前条目中的右侧滑动控件
+                    val scrollView1 = convertView!!.findViewById<SyncHScrollView>(R.id.horizontalScrollView1)
+                    //TODO 划重点：这里需要从传入的列表头拿到里面的右侧滑动控件
+                    //将当前条目的右侧滑动控件添加到头部滑动控件的滑动观察者集合中
+                    headScrollView.AddOnScrollChangedListener(OnScrollChangedListenerImp(scrollView1))
 
-            //TODO 划重点：这里需要从传入的列表头拿到里面的右侧滑动控件
-            //将当前条目的右侧滑动控件添加到头部滑动控件的滑动观察者集合中
-            headScrollView.AddOnScrollChangedListener(OnScrollChangedListenerImp(scrollView1))
+                    //进行holder的初始化操作
+                    holder1.scrollView = scrollView1
+                    holder1.txt1 = convertView.findViewById(R.id.textView1)
+                    holder1.txt2 = convertView.findViewById(R.id.textView2)
+                    holder1.txt3 = convertView.findViewById(R.id.textView3)
+                    holder1.txt4 = convertView.findViewById(R.id.textView4)
+                    holder1.txt5 = convertView.findViewById(R.id.textView5)
+                    holder1.txt6 = convertView.findViewById(R.id.textView6)
+                    holder1.txt7 = convertView.findViewById(R.id.textView7)
 
-            //进行holder的初始化操作
-            holder.scrollView = scrollView1
-            holder.txt1 = convertView.findViewById(R.id.textView1)
-            holder.txt2 = convertView.findViewById(R.id.textView2)
-            holder.txt3 = convertView.findViewById(R.id.textView3)
-            holder.txt4 = convertView.findViewById(R.id.textView4)
-            holder.txt5 = convertView.findViewById(R.id.textView5)
-            holder.txt6 = convertView.findViewById(R.id.textView6)
-            holder.txt7 = convertView.findViewById(R.id.textView7)
+                    convertView.tag = holder1
+                }
 
-            convertView.tag = holder
+                1 -> {
+                    convertView = mInflater.inflate(R.layout.item_layout_type6, null)
+                    holder2 = ViewHolder2()
+
+                    convertView.tag = holder2
+                }
+            }
+
         } else {
-            holder = convertView.tag as ViewHolder
+            when (typeItem) {
+                0 -> {
+                    holder1 = convertView.tag as ViewHolder1
+                }
+                1 -> {
+                    holder2 = convertView.tag as ViewHolder2
+                }
+            }
         }
-        holder.txt1!!.text = currentData[position].str1
-        holder.txt2!!.text = currentData[position].str2!!
-        holder.txt3!!.text = currentData[position].str3!!
-        holder.txt4!!.text = currentData[position].str4!!
-        holder.txt5!!.text = currentData[position].str5!!
-        holder.txt6!!.text = currentData[position].str6!!
-        holder.txt7!!.text = currentData[position].str7!!
+        when (typeItem) {
+            0 -> {
+                holder1?.txt1!!.text = currentData[position].str1
+                holder1.txt2!!.text = currentData[position].str2!!
+                holder1.txt3!!.text = currentData[position].str3!!
+                holder1.txt4!!.text = currentData[position].str4!!
+                holder1.txt5!!.text = currentData[position].str5!!
+                holder1.txt6!!.text = currentData[position].str6!!
+                holder1.txt7!!.text = currentData[position].str7!!
+            }
+        }
         return convertView
     }
 
@@ -109,7 +125,7 @@ class Type6Adapter(context: Context,
         }
     }
 
-    internal inner class ViewHolder {
+    internal inner class ViewHolder1 {
         var txt1: TextView? = null
         var txt2: TextView? = null
         var txt3: TextView? = null
@@ -120,5 +136,8 @@ class Type6Adapter(context: Context,
         var scrollView: HorizontalScrollView? = null
     }
 
-
+    internal inner class ViewHolder2 {
+        var txt1: TextView? = null
+        var iv_icon: ImageView? = null
+    }
 }

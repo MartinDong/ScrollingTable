@@ -6,14 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.AbsListView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.HorizontalScrollView
 import android.widget.ListView
-import android.widget.RelativeLayout
 import android.widget.Toast
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type4.model.Data
 import java.util.*
+
 
 /**
  * 最完美实现，使用 ListView + HorizontalScrollView 实现
@@ -21,22 +22,26 @@ import java.util.*
  */
 class Type4Activity : Activity() {
     internal lateinit var mListView1: ListView
-    internal lateinit var mHead: RelativeLayout
+    internal lateinit var mHeadHeader: View
+    internal lateinit var mHeadSticky: View
     internal lateinit var type4Adapter: Type4Adapter
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_type4)
 
-        mHead = findViewById(R.id.head)
-        mHead.isFocusable = true
-        mHead.isClickable = true
+        mHeadSticky = findViewById(R.id.head)
+
+        mHeadHeader = View.inflate(this, R.layout.item_layout_type4, null)
+        mHeadHeader.isFocusable = true
+        mHeadHeader.isClickable = true
 
         //TODO 划重点：这里需要从传入的列表头拿到里面的右侧滑动控件
-        mHead.setOnTouchListener(ListViewAndHeadViewTouchListener())
-
+        mHeadHeader.setOnTouchListener(ListViewAndHeadViewTouchListener())
 
         mListView1 = findViewById(R.id.lv_produce)
+
+        mListView1.addHeaderView(mHeadHeader)
         mListView1.setOnTouchListener(ListViewAndHeadViewTouchListener())
 
         // 创建当前用于显示视图的数据
@@ -55,7 +60,7 @@ class Type4Activity : Activity() {
         }
 
 
-        type4Adapter = Type4Adapter(this, R.layout.item_layout_type4, currentData, mHead)
+        type4Adapter = Type4Adapter(this, R.layout.item_layout_type4, currentData, mHeadHeader)
         mListView1.adapter = type4Adapter
         // OnClick监听
         mListView1.onItemClickListener = OnItemClickListener { arg0, arg1, arg2, arg3 ->
@@ -64,6 +69,20 @@ class Type4Activity : Activity() {
                     Toast.LENGTH_SHORT).show()
         }
 
+
+        mListView1.setOnScrollListener(object : AbsListView.OnScrollListener {
+            override fun onScroll(view: AbsListView?, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
+                if (firstVisibleItem >= 1) {
+                    mHeadSticky.visibility = View.VISIBLE
+                } else {
+                    mHeadSticky.visibility = View.GONE
+                }
+            }
+
+            override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
+
+            }
+        })
     }
 
     /**
@@ -73,8 +92,10 @@ class Type4Activity : Activity() {
 
         override fun onTouch(arg0: View, arg1: MotionEvent): Boolean {
             // 当在列头 和 listView控件上touch时，将这个touch的事件分发给 ScrollView
-            val headScrollView = mHead.findViewById<HorizontalScrollView>(R.id.horizontalScrollView1)
+            val headScrollView = mHeadHeader.findViewById<HorizontalScrollView>(R.id.horizontalScrollView1)
             headScrollView.onTouchEvent(arg1)
+            val headStickyScrollView = mHeadSticky.findViewById<HorizontalScrollView>(R.id.horizontalScrollView1)
+            headStickyScrollView.onTouchEvent(arg1)
             return false
         }
     }

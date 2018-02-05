@@ -9,9 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.HorizontalScrollView
-import android.widget.RelativeLayout
 import android.widget.TextView
-
 import com.example.kotlin.scrollingtable.R
 import com.example.kotlin.scrollingtable.type4.model.Data
 import com.example.kotlin.scrollingtable.type4.view.SyncHScrollView
@@ -32,7 +30,7 @@ class Type4Adapter(context: Context,
                    /**
                     * ListView头部
                     */
-                   private val mHead: RelativeLayout) : BaseAdapter() {
+                   private val mHead: View) : BaseAdapter() {
     private val mInflater: LayoutInflater
 
 
@@ -104,12 +102,12 @@ class Type4Adapter(context: Context,
             holder = convertView.tag as ViewHolder
         }
         holder.txt1!!.text = currentData[position].str1
-        holder.txt2!!.text =  currentData[position].str2!!
-        holder.txt3!!.text =  currentData[position].str3!!
-        holder.txt4!!.text =  currentData[position].str4!!
-        holder.txt5!!.text =  currentData[position].str5!!
-        holder.txt6!!.text =  currentData[position].str6!!
-        holder.txt7!!.text =  currentData[position].str7!!
+        holder.txt2!!.text = currentData[position].str2!!
+        holder.txt3!!.text = currentData[position].str3!!
+        holder.txt4!!.text = currentData[position].str4!!
+        holder.txt5!!.text = currentData[position].str5!!
+        holder.txt6!!.text = currentData[position].str6!!
+        holder.txt7!!.text = currentData[position].str7!!
         return convertView
     }
 
